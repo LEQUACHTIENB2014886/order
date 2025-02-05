@@ -2,7 +2,7 @@
   <el-row class="custom-header">
     <el-col :span="4">
       <div class="logo-container">
-        <a href="#"><img src="../assets/logocute.png" alt="Logo"/></a>
+        <a href="#"><img src="../assets/logocute.png" alt="Logo" /></a>
       </div>
     </el-col>
     <el-col :span="12" class="menu-container">
@@ -59,10 +59,10 @@
     </el-col>
 
     <el-col :span="4" class="icon-container">
-      <router-link to="/account">
+      <router-link to="/account" active-class="active">
         <el-icon :size="28" class="orange-icon"><UserFilled /></el-icon>
       </router-link>
-      <router-link to="/payments">
+      <router-link to="/payments" active-class="active">
         <el-badge :value="3" class="item">
           <el-icon :size="28" class="orange-icon"><ShoppingCart /></el-icon>
         </el-badge>
@@ -128,6 +128,25 @@
   margin-right: 30px;
 }
 
+.icon-container a {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-container .active {
+  color: #ff6600;
+}
+
+.icon-container .active::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ff6600;
+}
+
 .icon {
   width: 26px;
   height: 20px;
@@ -164,5 +183,4 @@
   margin-right: 8px;
   vertical-align: middle;
 }
-
 </style>
