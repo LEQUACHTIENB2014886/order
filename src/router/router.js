@@ -4,6 +4,7 @@ import Overview from '@/views/Overview.vue'
 import Menu from '@/views/Menu.vue'
 import Account from '@/views/Account.vue'
 import Payments from '@/views/Payments.vue'
+import Sales from '@/views/Sales.vue'
 
 const routes = [
   { path: '/', name: 'Homepage', component: Homepage },
@@ -11,6 +12,7 @@ const routes = [
   { path: '/menu', name: 'Menu', component: Menu },
   { path: '/account', name: 'Account', component: Account },
   { path: '/payments', name: 'Payments', component: Payments },
+  { path: '/sales', name: 'Sales', component: Sales },
 ]
 
 const router = createRouter({

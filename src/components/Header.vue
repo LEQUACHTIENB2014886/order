@@ -8,7 +8,8 @@
     <el-col :span="12" class="menu-container">
       <router-link to="/" active-class="active">Trang chủ</router-link>
       <router-link to="/overview" active-class="active">Giới thiệu</router-link>
-      <router-link to="/menu" active-class="active">Menu</router-link>
+      <router-link to="/menu" active-class="active">Thực đơn</router-link>
+      <router-link to="/sales" active-class="active">Khuyến mãi</router-link>
       <el-dropdown
         class="language"
         trigger="click"
@@ -70,7 +71,12 @@
     </el-col>
   </el-row>
 </template>
-<style scoped>
+
+<script setup>
+</script>
+<style lang="scss" scoped>
+@import "@/assets/styles/variables";
+
 .custom-header {
   display: flex;
   justify-content: space-between;
@@ -78,7 +84,7 @@
   gap: 26px;
   height: 80px;
   padding: 0 20px;
-  background-color: #f9f9f9;
+  background-color: $background-color;
   border-bottom: 2px solid #ccc;
   box-sizing: border-box;
 }
@@ -98,7 +104,7 @@
 .menu-container a {
   font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: $secondary-color;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   position: relative;
@@ -106,7 +112,7 @@
 
 .menu-container a:hover,
 .menu-container a.active {
-  color: #ff6600;
+  color: $hover-color;
   font-weight: bold;
 }
 
@@ -117,7 +123,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #ff6600;
+  background-color: $hover-color;
 }
 
 .icon-container {
@@ -134,7 +140,7 @@
 }
 
 .icon-container .active {
-  color: #ff6600;
+  color: $hover-color;
 }
 
 .icon-container .active::after {
@@ -144,7 +150,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #ff6600;
+  background-color: $hover-color;
 }
 
 .icon {
@@ -153,7 +159,7 @@
 }
 
 .orange-icon {
-  color: #ff6600;
+  color: $primary-color;
 }
 
 .language .el-button {
