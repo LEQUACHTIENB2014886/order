@@ -20,8 +20,9 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to) => {
-  document.title = `Trà Sữa Nice | ${to.name}` 
-})
+router.beforeEach((to, from, next) => {
+  document.title = `Trà Sữa Nice | ${to.name}`
+  next();
+});
 
 export default router

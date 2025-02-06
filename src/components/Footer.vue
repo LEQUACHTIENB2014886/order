@@ -1,11 +1,138 @@
 <template>
-    <div>
-      <h1>Trang Chủ</h1>
-      <p>Chào mừng bạn đến với trang chủ!</p>
-    </div>
-  </template>
-  <style scoped>
- p{
-    margin-bottom: 700px;
+  <footer>
+    <el-row>
+      <el-col :span="10" class="left">
+        <div class="logo-container">
+          <a>Trà Sữa Nice</a>
+          <a>
+            <img src="../assets/logocute.png" alt="Logo" />
+          </a>
+        </div>
+      </el-col>
+      <el-col :span="14" class="right">
+        <el-row class="right-first">
+          <router-link to="/" active-class="active">Trang chủ</router-link> |
+          <router-link to="/overview" active-class="active"
+            >Giới thiệu</router-link
+          >
+          |
+          <router-link to="/menu" active-class="active">Thực đơn</router-link> |
+          <router-link to="/sales" active-class="active"
+            >Khuyến mãi</router-link
+          >
+        </el-row>
+        <br />
+        <hr />
+        <div class="contact-info">
+          <p>
+            <el-icon><PhoneFilled /></el-icon> 0345 324 989
+          </p>
+          <p>
+            <el-icon><Message /></el-icon> lequachtien123@email.com
+          </p>
+          <p>
+            <el-icon><Location /></el-icon> Bình Minh, Vĩnh Long
+          </p>
+        </div>
+      </el-col>
+    </el-row>
+    <el-backtop :right="50" :bottom="50" />
+  </footer>
+</template>
+
+<script setup>
+</script>
+
+
+<style lang="scss" scoped>
+@use "@/assets/styles/variables" as *;
+
+.left {
+  background: $background-footer-color-left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 30px;
+}
+
+.right {
+  background: $background-footer-color-right;
+  align-items: center;
+  padding: 30px;
+}
+
+.right-first {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  color: $secondary-color;
+}
+
+.el-backtop {
+  --el-backtop-text-color: #{$primary-color};
+  transition: transform 0.3s ease;
+  padding: 8px;
+}
+
+.el-backtop:hover {
+  transform: scale(1.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+img {
+  width: 120px;
+}
+
+.logo-container a {
+  font-size: 58px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 215, 0, 0.8),
+    0 0 20px rgba(255, 140, 0, 0.8);
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
+      0 0 10px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 140, 0, 0.6);
   }
-  </style>
+  100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1),
+      0 0 20px rgba(255, 215, 0, 0.9), 0 0 30px rgba(255, 140, 0, 0.9);
+  }
+}
+
+.contact-info {
+  margin-top: 20px;
+  color: $secondary-color;
+  font-weight: normal;
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+.right-first a {
+  color: $secondary-color;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.right-first a:hover {
+  transform: scale(1.04);
+  color: $primary-color;
+}
+
+hr {
+  border: 1px solid $primary-color;
+}
+</style>

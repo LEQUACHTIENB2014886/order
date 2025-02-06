@@ -6,6 +6,6 @@
   </template>
   <style scoped>
  p{
-    margin-bottom: 700px;
+    margin-bottom: 1200px;
   }
   </style>

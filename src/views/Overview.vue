@@ -4,4 +4,8 @@
       <p>Chào mừng bạn đến với Giới thiệu!</p>
     </div>
   </template>
-  
+   <style scoped>
+   p{
+      margin-bottom: 700px;
+    }
+    </style>
