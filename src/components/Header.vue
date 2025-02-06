@@ -179,4 +179,7 @@ const changeLang = (lang) => {
 .el-menu-item.is-active {
     color: #{$color-1};
 }
+.item{
+  margin-right:7px;
+}
 </style>
