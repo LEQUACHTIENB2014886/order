@@ -118,27 +118,35 @@ const addToCart = (item) => {
   font-size: 1rem;
   color: $color-3;
 }
-
 .item-actions {
   margin-top: 10px;
+  display: flex; 
+  justify-content: space-between;
+  width: 100%;
+}
 
-  .btn {
-    background-color: $color-1;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.btn {
+  background-color: $color-1;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1; 
+  margin: 0 5px;
+}
 
-    &:hover {
-      background-color: darken($color-1, 10%);
-    }
+.btn:hover {
+  background-color: darken($color-1, 10%);
+}
 
-    &.add-to-cart {
-      margin-right: 10px;
-    }
-  }
+.add-to-cart {
+  margin-right: 10px;
+}
+
+.view-details {
+  margin-left: 10px;
 }
 
 .el-alert {
