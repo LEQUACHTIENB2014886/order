@@ -1,18 +1,14 @@
 <template>
   <div class="loading-overlay">
-    <svg class="loading-icon" viewBox="-10 -10 50 50">
-      <path
-        d="M 30 15 L 28 17 M 25.61 25.61 A 15 15, 0, 0, 1, 15 30 A 15 15, 0, 1, 1, 27.99 7.5 L 15 15"
-        style="stroke-width: 4px; fill: none"
-        class="loading-path"
-      />
+    <svg class="loading-icon" viewBox="0 0 50 50">
+      <circle class="loading-circle" cx="25" cy="25" r="20"></circle>
     </svg>
   </div>
 </template>
-  
-  <script setup>
+
+<script setup>
 </script>
-  
+
 <style lang="scss" scoped>
 @use "@/assets/styles/variables" as *;
 
@@ -22,7 +18,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,13 +26,19 @@
 }
 
 .loading-icon {
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
+  width: 60px;
+  height: 60px;
+  animation: spin 1.5s linear infinite;
 }
 
-.loading-path {
+.loading-circle {
+  fill: none;
   stroke: $color-1;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 126; 
+  stroke-dashoffset: 0;
+  animation: draw 1.5s ease-in-out infinite;
 }
 
 @keyframes spin {
@@ -47,5 +49,16 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 126;
+  }
+  50% {
+    stroke-dashoffset: 63;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
 </style>
-  
