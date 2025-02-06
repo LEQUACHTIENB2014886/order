@@ -1,76 +1,104 @@
 <template>
   <div class="menu">
-    <el-upload
-    v-model:file-list="fileList"
-    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-    list-type="picture-card"
-    :on-preview="handlePictureCardPreview"
-    :on-remove="handleRemove"
-  >
-    <el-icon><Plus /></el-icon>
-  </el-upload>
-
-  <el-dialog v-model="dialogVisible">
-    <img w-full :src="dialogImageUrl" alt="Preview Image" />
-  </el-dialog>
+    <div class="menu-grid">
+      <div class="menu-item" v-for="item in menuItems" :key="item.id">
+        <div class="image-wrapper">
+          <img :src="item.url || defaultImage" alt="Menu Item" />
+        </div>
+        <div class="item-info">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.price }} VND</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { Plus } from '@element-plus/icons-vue'
+<script>
+import { ref, onMounted } from "vue";
+import axios from "axios";
 
-import type { UploadProps, UploadUserFile } from 'element-plus'
+export default {
+  setup() {
+    const menuItems = ref([]);
+    const defaultImage = "/images/default-image.jpg";
 
-const fileList = ref<UploadUserFile[]>([
-  {
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-  {
-    name: 'plant-1.png',
-    url: '/images/plant-1.png',
-  },
-  {
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-  {
-    name: 'plant-2.png',
-    url: '/images/plant-2.png',
-  },
-  {
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-  {
-    name: 'figure-1.png',
-    url: '/images/figure-1.png',
-  },
-  {
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-  {
-    name: 'figure-2.png',
-    url: '/images/figure-2.png',
-  },
-])
+    onMounted(() => {
+      axios
+        .get("http://localhost:8081/api/v1/System/Getbases")
+        .then((response) => {
+          if (response.data.code === 200) {
+            menuItems.value = response.data.data;
+          } else {
+            console.error("API Error: ", response.data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("API Error: ", error);
+        });
+    });
 
-const dialogImageUrl = ref('')
-const dialogVisible = ref(false)
-
-const handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
-  console.log(uploadFile, uploadFiles)
-}
-
-const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
-  dialogImageUrl.value = uploadFile.url!
-  dialogVisible.value = true
-}
+    return { menuItems, defaultImage };
+  },
+};
 </script>
-<style scoped>
-.menu{
-  margin-bottom: 700px;;
+
+<style lang="scss" scoped>
+@use "@/assets/styles/variables" as *;
+
+.menu {
+  margin: 20px 200px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.menu-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 0;
+  padding-bottom: 83.33%;
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-info {
+  margin-top: 10px;
+}
+
+.item-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: $color-1;
+}
+
+.item-info p {
+  font-size: 1rem;
+  color: $color-3;
 }
 </style>

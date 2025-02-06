@@ -5,7 +5,7 @@ import Menu from '@/views/Menu.vue';
 import Account from '@/views/Account.vue';
 import Payments from '@/views/Payments.vue';
 import Sales from '@/views/Sales.vue';
-
+import Contact from '@/views/Contact.vue';
 const routes = [
   { path: '/', name: 'Homepage', component: Homepage },
   { path: '/overview', name: 'Overview', component: Overview },
@@ -13,6 +13,7 @@ const routes = [
   { path: '/account', name: 'Account', component: Account },
   { path: '/payments', name: 'Payments', component: Payments },
   { path: '/sales', name: 'Sales', component: Sales },
+  { path: '/contact', name: 'Contact', component: Contact },
 ];
 
 const router = createRouter({

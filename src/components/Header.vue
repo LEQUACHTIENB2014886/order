@@ -9,7 +9,7 @@
       <router-link to="/overview" active-class="active">{{ $t("about") }}</router-link>
       <router-link to="/menu" active-class="active">{{ $t("menu") }}</router-link>
       <router-link to="/sales" active-class="active">{{ $t("promo") }}</router-link>
-
+      <router-link to="/contact" active-class="active">{{ $t("contact") }}</router-link>
       <el-dropdown class="language" trigger="click" placement="bottom-end">
         <template #dropdown>
           <el-menu>
@@ -116,6 +116,7 @@ const changeLang = (lang) => {
   background-color: $background-color-1;
   border-bottom: 2px solid #ccc;
   box-sizing: border-box;
+  
 }
 
 .logo-container img {
