@@ -81,7 +81,7 @@ footer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
   color: $color-3;
 }
 
