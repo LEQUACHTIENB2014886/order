@@ -273,5 +273,7 @@ const changeLang = (lang) => {
 .slide-leave-to {
   transform: translateY(-100%);
 }
-
+.item{
+  margin-right:7px;
+}
 </style>
