@@ -109,10 +109,22 @@ const addToCart = (item) => {
 }
 
 .item-info h3 {
-  font-size: 1.2rem;
-  margin-bottom: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
   color: $color-1;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease; 
 }
+
+.item-info h3:hover {
+  color: darken($color-1, 5%);
+  transform: scale(1.1); 
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
 
 .item-info p {
   font-size: 1rem;

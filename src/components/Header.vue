@@ -144,6 +144,7 @@ const changeLang = (lang) => {
 .menu-container a.active {
   color: $color-1;
   font-weight: bold;
+  transform: scale(1.1); 
 }
 
 .menu-container a.active::after {
@@ -189,6 +190,13 @@ const changeLang = (lang) => {
   height: 20px;
 }
 
+.icon-btn{
+  transition: all 0.3s ease-in-out;
+}
+
+.icon-btn:hover{
+  transform: scale(1.1);
+}
 .orange-icon {
   color: $color-1;
 }
