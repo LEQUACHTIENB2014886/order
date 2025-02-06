@@ -1,7 +1,7 @@
 <template>
   <footer>
     <el-row>
-      <el-col :span="10" class="left">
+      <el-col :span="12" class="left">
         <div class="logo-container">
           <a>{{ $t("title") }}</a>
           <a>
@@ -9,7 +9,7 @@
           </a>
         </div>
       </el-col>
-      <el-col :span="14" class="right">
+      <el-col :span="12" class="right">
         <el-row class="right-first">
           <router-link to="/" active-class="active">{{ $t("home") }}</router-link>
           <router-link to="/overview" active-class="active">{{ $t("about") }}</router-link>

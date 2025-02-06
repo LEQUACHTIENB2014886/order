@@ -10,9 +10,9 @@
           <p>{{ item.price }} ₫</p>
           <div class="item-actions">
             <button class="btn add-to-cart" @click="addToCart(item)">
-              {{ $t("Add to Cart") }}
+              {{ $t("add") }}
             </button>
-            <button class="btn view-details">{{ $t("View Details") }}</button>
+            <button class="btn view-details">{{ $t("view") }}</button>
           </div>
         </div>
       </div>
