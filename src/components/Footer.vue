@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="10" class="left">
         <div class="logo-container">
-          <a>Trà Sữa Nice</a>
+          <a>{{ $t('title') }}</a>
           <a>
             <img src="../assets/logocute.png" alt="Logo" />
           </a>
@@ -11,15 +11,10 @@
       </el-col>
       <el-col :span="14" class="right">
         <el-row class="right-first">
-          <router-link to="/" active-class="active">Trang chủ</router-link> |
-          <router-link to="/overview" active-class="active"
-            >Giới thiệu</router-link
-          >
-          |
-          <router-link to="/menu" active-class="active">Thực đơn</router-link> |
-          <router-link to="/sales" active-class="active"
-            >Khuyến mãi</router-link
-          >
+          <router-link to="/" active-class="active">{{ $t('home') }}</router-link> |
+          <router-link to="/overview" active-class="active">{{ $t('about') }}</router-link> |
+          <router-link to="/menu" active-class="active">{{ $t('menu') }}</router-link> |
+          <router-link to="/sales" active-class="active">{{ $t('promo') }}</router-link>
         </el-row>
         <br />
         <hr />
@@ -42,6 +37,7 @@
 
 <script setup>
 </script>
+
 
 
 <style lang="scss" scoped>
@@ -134,8 +130,14 @@ img {
 }
 
 hr {
-  border: 1px solid $color-3;
+  border: none;
+  width: 500px;
+  height: 2px;
+  background: linear-gradient(to right, $color-3, rgba(0, 0, 0, 0));
+  margin-left: 0;
 }
+
+
 .el-icon{
   margin-right: 5px;
 }
