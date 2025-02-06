@@ -48,7 +48,7 @@
 @use "@/assets/styles/variables" as *;
 
 .left {
-  background: $background-footer-color-left;
+  background: $color-1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -56,7 +56,7 @@
 }
 
 .right {
-  background: $background-footer-color-right;
+  background:$background-color-1;
   align-items: center;
   padding: 30px;
 }
@@ -66,11 +66,11 @@
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
-  color: $secondary-color;
+  color: $color-3;
 }
 
 .el-backtop {
-  --el-backtop-text-color: #{$primary-color};
+  --el-backtop-text-color: #{$color-1};
   transition: transform 0.3s ease;
   padding: 8px;
 }
@@ -113,26 +113,30 @@ img {
 
 .contact-info {
   margin-top: 20px;
-  color: $secondary-color;
+  color: $color-3;
   font-weight: normal;
 }
 
 .contact-info p {
-  margin: 5px 0;
+  display: flex;
+  align-items: center;
 }
 
 .right-first a {
-  color: $secondary-color;
+  color: $color-3;
   text-decoration: none;
   transition: transform 0.3s ease;
 }
 
 .right-first a:hover {
   transform: scale(1.04);
-  color: $primary-color;
+  color: $color-1;
 }
 
 hr {
-  border: 1px solid $primary-color;
+  border: 1px solid $color-3;
+}
+.el-icon{
+  margin-right: 5px;
 }
 </style>

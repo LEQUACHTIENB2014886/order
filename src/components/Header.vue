@@ -25,20 +25,11 @@
                   alt="Vietnamese"
                   class="icon"
                 />
-                Vietnamese
+                Tiếng Việt
               </a>
             </el-menu-item>
+            
             <el-menu-item index="1-2">
-              <a>
-                <img
-                  src="../assets/Flag/China_Flag.png"
-                  alt="Chinese"
-                  class="icon"
-                />
-                Chinese
-              </a>
-            </el-menu-item>
-            <el-menu-item index="1-3">
               <a>
                 <img
                   src="../assets/Flag/United_KingDom_Flag.png"
@@ -46,6 +37,26 @@
                   class="icon"
                 />
                 English
+              </a>
+            </el-menu-item>
+            <el-menu-item index="1-3">
+              <a>
+                <img
+                  src="../assets/Flag/China_Flag.png"
+                  alt="Chinese Simplified"
+                  class="icon"
+                />
+                简体中文
+              </a>
+            </el-menu-item>
+            <el-menu-item index="1-4">
+              <a>
+                <img
+                  src="../assets/Flag/Taiwan_Flag.png"
+                  alt="Chinese Traditional"
+                  class="icon"
+                />
+                繁體中文
               </a>
             </el-menu-item>
           </el-menu>
@@ -85,7 +96,7 @@
   gap: 26px;
   height: 80px;
   padding: 0 20px;
-  background-color: $background-color;
+  background-color: $background-color-1;
   border-bottom: 2px solid #ccc;
   box-sizing: border-box;
 }
@@ -105,7 +116,7 @@
 .menu-container a {
   font-size: 16px;
   font-weight: bold;
-  color: $secondary-color;
+  color: $color-3;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   position: relative;
@@ -113,7 +124,7 @@
 
 .menu-container a:hover,
 .menu-container a.active {
-  color: $primary-color;
+  color: $color-1;
   font-weight: bold;
 }
 
@@ -124,7 +135,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: $primary-color;
+  background-color: $color-1;
 }
 
 .icon-container {
@@ -141,7 +152,7 @@
 }
 
 .icon-container .active {
-  color: $primary-color;
+  color: $color-1;
 }
 
 .icon-container .active::after {
@@ -151,7 +162,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: $primary-color;
+  background-color: $color-1;
 }
 
 .icon {
@@ -160,7 +171,7 @@
 }
 
 .orange-icon {
-  color: $primary-color;
+  color: $color-1;
 }
 
 .language .el-button {

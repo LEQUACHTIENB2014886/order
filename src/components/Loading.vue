@@ -36,7 +36,7 @@
 }
 
 .loading-path {
-  stroke: $primary-color;
+  stroke: $color-1;
 }
 
 @keyframes spin {
