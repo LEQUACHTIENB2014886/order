@@ -6,69 +6,36 @@
       </div>
     </el-col>
     <el-col :span="12" class="menu-container">
-      <router-link to="/" active-class="active">Trang chủ</router-link>
-      <router-link to="/overview" active-class="active">Giới thiệu</router-link>
-      <router-link to="/menu" active-class="active">Thực đơn</router-link>
-      <router-link to="/sales" active-class="active">Khuyến mãi</router-link>
-      <el-dropdown
-        class="language"
-        trigger="click"
-        placement="bottom-end"
-        :dropdown-append-to-body="true"
-      >
-        <template #dropdown>
-          <el-menu>
-            <el-menu-item index="1-1">
-              <a>
-                <img
-                  src="../assets/Flag/VietNam_Flag.png"
-                  alt="Vietnamese"
-                  class="icon"
-                />
-                Tiếng Việt
-              </a>
-            </el-menu-item>
-            
-            <el-menu-item index="1-2">
-              <a>
-                <img
-                  src="../assets/Flag/United_KingDom_Flag.png"
-                  alt="English"
-                  class="icon"
-                />
-                English
-              </a>
-            </el-menu-item>
-            <el-menu-item index="1-3">
-              
-              <a>
-                <img
-                  src="../assets/Flag/China_Flag.png"
-                  alt="Chinese Simplified"
-                  class="icon"
-                />
-                简体中文
-              </a>
-            </el-menu-item>
-            <el-menu-item index="1-4">
-              <a>
-                <img
-                  src="../assets/Flag/Taiwan_Flag.png"
-                  alt="Chinese Traditional"
-                  class="icon"
-                />
-                繁體中文
-              </a>
-            </el-menu-item>
-          </el-menu>
-        </template>
-        <el-button
-          class="icon"
-          style="background: none; border: none; padding: 0"
-        >
-          <img src="../assets/language.svg" alt="Language" class="icon" />
-        </el-button>
-      </el-dropdown>
+      <router-link to="/" active-class="active">{{ $t("home") }}</router-link>
+      <router-link to="/overview" active-class="active">{{ $t("about") }}</router-link>
+      <router-link to="/menu" active-class="active">{{ $t("menu") }}</router-link>
+      <router-link to="/sales" active-class="active">{{ $t("promo") }}</router-link>
+
+      <el-dropdown class="language" trigger="click" placement="bottom-end">
+    <template #dropdown>
+      <el-menu>
+        <el-menu-item index="1-1" @click="changeLang('vi')">
+          <img src="../assets/Flag/VietNam_Flag.png" alt="Vietnamese" class="icon" />
+          Tiếng Việt
+        </el-menu-item>
+        <el-menu-item index="1-2" @click="changeLang('en')">
+          <img src="../assets/Flag/United_KingDom_Flag.png" alt="English" class="icon" />
+          English
+        </el-menu-item>
+        <el-menu-item index="1-3" @click="changeLang('zh-cn')">
+          <img src="../assets/Flag/China_Flag.png" alt="Chinese Simplified" class="icon" />
+          简体中文
+        </el-menu-item>
+        <el-menu-item index="1-4" @click="changeLang('zh-tw')">
+          <img src="../assets/Flag/Taiwan_Flag.png" alt="Chinese Traditional" class="icon" />
+          繁體中文
+        </el-menu-item>
+      </el-menu>
+    </template>
+    <el-button class="icon" style="background: none; border: none; padding: 0">
+      <img src="../assets/language.svg" alt="Language" class="icon" />
+    </el-button>
+  </el-dropdown>
     </el-col>
 
     <el-col :span="4" class="icon-container">
@@ -83,10 +50,16 @@
     </el-col>
   </el-row>
 </template>
-
 <script setup>
+import { useStore } from "vuex";
 
+const store = useStore();
+
+const changeLang = (lang) => {
+  store.dispatch("language/changeLanguage", lang);
+};
 </script>
+
 <style lang="scss" scoped>
 @use "@/assets/styles/variables" as *;;
 
@@ -201,5 +174,9 @@
 .el-menu-item img.icon {
   margin-right: 8px;
   vertical-align: middle;
+}
+
+.el-menu-item.is-active {
+    color: #{$color-1};
 }
 </style>
