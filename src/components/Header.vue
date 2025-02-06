@@ -1,10 +1,9 @@
 <template>
   <el-row class="custom-header">
-    <el-col :span="4">
-      <div class="logo-container">
-        <a href="#"><img src="../assets/logocute.png" alt="Logo" /></a>
-      </div>
+    <el-col :span="4" class="logo-container">
+      <a href="#"><img src="../assets/logocute.png" alt="Logo" /></a>
     </el-col>
+
     <el-col :span="12" class="menu-container">
       <router-link to="/" active-class="active">{{ $t("home") }}</router-link>
       <router-link to="/overview" active-class="active">{{ $t("about") }}</router-link>
@@ -12,30 +11,30 @@
       <router-link to="/sales" active-class="active">{{ $t("promo") }}</router-link>
 
       <el-dropdown class="language" trigger="click" placement="bottom-end">
-    <template #dropdown>
-      <el-menu>
-        <el-menu-item index="1-1" @click="changeLang('vi')">
-          <img src="../assets/Flag/VietNam_Flag.png" alt="Vietnamese" class="icon" />
-          Tiếng Việt
-        </el-menu-item>
-        <el-menu-item index="1-2" @click="changeLang('en')">
-          <img src="../assets/Flag/United_KingDom_Flag.png" alt="English" class="icon" />
-          English
-        </el-menu-item>
-        <el-menu-item index="1-3" @click="changeLang('zh-cn')">
-          <img src="../assets/Flag/China_Flag.png" alt="Chinese Simplified" class="icon" />
-          简体中文
-        </el-menu-item>
-        <el-menu-item index="1-4" @click="changeLang('zh-tw')">
-          <img src="../assets/Flag/Taiwan_Flag.png" alt="Chinese Traditional" class="icon" />
-          繁體中文
-        </el-menu-item>
-      </el-menu>
-    </template>
-    <el-button class="icon" style="background: none; border: none; padding: 0">
-      <img src="../assets/language.svg" alt="Language" class="icon" />
-    </el-button>
-  </el-dropdown>
+        <template #dropdown>
+          <el-menu>
+            <el-menu-item index="1-1" @click="changeLang('vi')">
+              <img src="../assets/Flag/VietNam_Flag.png" alt="Vietnamese" class="icon" />
+              Tiếng Việt
+            </el-menu-item>
+            <el-menu-item index="1-2" @click="changeLang('en')">
+              <img src="../assets/Flag/United_KingDom_Flag.png" alt="English" class="icon" />
+              English
+            </el-menu-item>
+            <el-menu-item index="1-3" @click="changeLang('zh-cn')">
+              <img src="../assets/Flag/China_Flag.png" alt="Chinese Simplified" class="icon" />
+              简体中文
+            </el-menu-item>
+            <el-menu-item index="1-4" @click="changeLang('zh-tw')">
+              <img src="../assets/Flag/Taiwan_Flag.png" alt="Chinese Traditional" class="icon" />
+              繁體中文
+            </el-menu-item>
+          </el-menu>
+        </template>
+        <el-button class="icon-btn">
+          <img src="../assets/language.svg" alt="Language" class="icon" />
+        </el-button>
+      </el-dropdown>
     </el-col>
 
     <el-col :span="4" class="icon-container">
@@ -48,20 +47,64 @@
         </el-badge>
       </router-link>
     </el-col>
+
+    <el-col :span="4" class="menu-toggle" @click="toggleMenu">
+      <el-icon :size="28"><Menu /></el-icon>
+    </el-col>
+
+    <transition name="slide">
+      <div v-if="mobileMenu" class="mobile-menu">
+        <router-link to="/" active-class="active" @click="toggleMenu">{{ $t("home") }}</router-link>
+        <router-link to="/overview" active-class="active" @click="toggleMenu">{{ $t("about") }}</router-link>
+        <router-link to="/menu" active-class="active" @click="toggleMenu">{{ $t("menu") }}</router-link>
+        <router-link to="/sales" active-class="active" @click="toggleMenu">{{ $t("promo") }}</router-link>
+        <el-dropdown class="language" trigger="click" placement="bottom-end">
+          <template #dropdown>
+            <el-menu>
+              <el-menu-item index="1-1" @click="changeLang('vi')">
+                <img src="../assets/Flag/VietNam_Flag.png" alt="Vietnamese" class="icon" />
+                Tiếng Việt
+              </el-menu-item>
+              <el-menu-item index="1-2" @click="changeLang('en')">
+                <img src="../assets/Flag/United_KingDom_Flag.png" alt="English" class="icon" />
+                English
+              </el-menu-item>
+              <el-menu-item index="1-3" @click="changeLang('zh-cn')">
+                <img src="../assets/Flag/China_Flag.png" alt="Chinese Simplified" class="icon" />
+                简体中文
+              </el-menu-item>
+              <el-menu-item index="1-4" @click="changeLang('zh-tw')">
+                <img src="../assets/Flag/Taiwan_Flag.png" alt="Chinese Traditional" class="icon" />
+                繁體中文
+              </el-menu-item>
+            </el-menu>
+          </template>
+          <el-button class="icon-btn">
+            <img src="../assets/language.svg" alt="Language" class="icon" />
+          </el-button>
+        </el-dropdown>
+      </div>
+    </transition>
   </el-row>
 </template>
+
 <script setup>
+import { ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
+const mobileMenu = ref(false);
+
+const toggleMenu = () => {
+  mobileMenu.value = !mobileMenu.value;
+};
 
 const changeLang = (lang) => {
   store.dispatch("language/changeLanguage", lang);
 };
 </script>
 
-<style lang="scss" scoped>
-@use "@/assets/styles/variables" as *;;
+<style lang="scss" scoped>@use "@/assets/styles/variables" as *;
 
 .custom-header {
   display: flex;
@@ -123,6 +166,7 @@ const changeLang = (lang) => {
 .icon-container a {
   position: relative;
   display: inline-block;
+  color: $color-3;
 }
 
 .icon-container .active {
@@ -176,10 +220,58 @@ const changeLang = (lang) => {
   vertical-align: middle;
 }
 
-.el-menu-item.is-active {
-    color: #{$color-1};
+.menu-toggle {
+  display: none;
+  cursor: pointer;
 }
-.item{
-  margin-right:7px;
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background: $background-color-1;
+  padding: 20px;
 }
+
+.mobile-menu a {
+  font-size: 16px;
+  font-weight: bold;
+  color: $color-3 !important;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a.active {
+  color: $color-1 !important;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .menu-container,
+  .icon-container {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .mobile-menu {
+    display: flex;
+  }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateY(-100%);
+}
+
 </style>
