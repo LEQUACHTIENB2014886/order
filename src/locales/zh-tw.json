@@ -1,9 +1,12 @@
 {
-    "home": "主頁",
-    "about": "關於我們",
-    "menu": "菜單",
-    "promo": "促銷",
-    "title": "奶茶不錯",
-    "contact": "接觸"
-  }
-  
+  "home": "主頁",
+  "about": "關於我們",
+  "menu": "菜單",
+  "promo": "促銷",
+  "title": "奶茶不錯",
+  "contact": "接觸",
+  "Trà Đào": "桃花茶",
+  "Trà Olong": "烏龍茶",
+  "Trà Vải": "荔枝茶",
+  "AddToCartSuccess": "已加入購物車 !!!"
+}
