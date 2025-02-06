@@ -73,9 +73,10 @@
 </template>
 
 <script setup>
+
 </script>
 <style lang="scss" scoped>
-@import "@/assets/styles/variables";
+@use "@/assets/styles/variables" as *;;
 
 .custom-header {
   display: flex;
@@ -112,7 +113,7 @@
 
 .menu-container a:hover,
 .menu-container a.active {
-  color: $hover-color;
+  color: $primary-color;
   font-weight: bold;
 }
 
@@ -123,7 +124,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: $hover-color;
+  background-color: $primary-color;
 }
 
 .icon-container {
@@ -140,7 +141,7 @@
 }
 
 .icon-container .active {
-  color: $hover-color;
+  color: $primary-color;
 }
 
 .icon-container .active::after {
@@ -150,7 +151,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: $hover-color;
+  background-color: $primary-color;
 }
 
 .icon {
