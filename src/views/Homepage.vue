@@ -1,36 +1,46 @@
 <template>
-  <div>
-    <div class="carousel">
-      <el-carousel :interval="5000" arrow="always" height="700px">
-        <el-carousel-item v-for="(image, index) in images" :key="index">
-          <el-image :src="image" alt="Carousel Image" class="carousel-image" fit="cover" />
-        </el-carousel-item>
-      </el-carousel>
-    </div>
-    <div class="container-content">
-      <div class="content1">
-        <el-image v-for="(img, index) in imgs" :key="index" :src="img" fit="cover" class="content-image1" />
-      </div>
-      <h1>Sản phẩm nổi bật</h1>
-      <div class="content2">
-        <el-image v-for="(img2, index) in imgs2" :key="index" :src="img2" fit="cover" class="content-image2" />
-      </div>
-    </div>
+  <div class="layout">
+    <!-- Carousel -->
+    <el-row class="carousel">
+      <el-col :span="24">
+        <el-carousel :interval="5000" arrow="always" height="700px">
+          <el-carousel-item v-for="(image, index) in images" :key="index">
+            <el-image :src="image" alt="Carousel Image" class="carousel-image" fit="cover" />
+          </el-carousel-item>
+        </el-carousel>
+      </el-col>
+    </el-row>
+
+    <!-- Nội dung chính -->
+    <el-row class="container-content" justify="center">
+      <el-col :span="20">
+        <!-- Hình ảnh lớn -->
+        <el-row justify="center" class="content1">
+          <el-col v-for="(img, index) in imgs" :key="index" :span="24">
+            <el-image :src="img" fit="cover" class="content-image1" />
+          </el-col>
+        </el-row>
+
+        <!-- Tiêu đề -->
+        <h1 class="title">Sản phẩm nổi bật</h1>
+
+        <!-- Danh sách sản phẩm -->
+        <el-row class="content2" :gutter="40" justify="center">
+          <el-col v-for="(img2, index) in imgs2" :key="index" :xs="24" :sm="12" :md="8" :lg="6">
+            <el-image :src="img2" fit="cover" class="content-image2" />
+          </el-col>
+        </el-row>
+      </el-col>
+    </el-row>
+
+    <!-- Footer -->
+    
   </div>
 </template>
 
 <script setup>
-
-const images = [
-  "/images/image1.png",
-  "/images/image2.png",
-];
-
-const imgs = [
-  "/images/img1.png",
-
-];
-
+const images = ["/images/image1.png", "/images/image2.png"];
+const imgs = ["/images/img1.png"];
 const imgs2 = [
   "/images/img2.png",
   "/images/img3.png",
@@ -42,42 +52,63 @@ const imgs2 = [
 </script>
 
 <style scoped>
+/* Bố cục tổng thể */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Định dạng carousel */
 .carousel-image {
   width: 100%;
   height: 100%;
 }
 
+/* Nội dung chính */
 .container-content {
+  flex-grow: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   color: #ff6600;
+  text-align: center;
 }
-
-
 
 .content1 {
   padding: 50px 0;
 }
 
 .content-image1 {
-  flex-wrap: wrap;
-  width: calc(100% - 40px);
+  width: 100%;
   max-height: 800px;
 }
 
+/* Danh sách sản phẩm */
 .content2 {
-  flex-wrap: wrap;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   max-width: 1500px;
-  max-height: 800px;
   gap: 40px;
 }
 
 .content-image2 {
-  width: calc(33.33% - 40px);
+  width: 100%;
   padding: 20px 0;
+}
+
+/* Tiêu đề */
+.title {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: auto;
 }
 </style>
