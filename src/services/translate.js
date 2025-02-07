@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_KEY = "AIzaSyDW4gj98s_w6L1dPiF-xOTbJpbnrS-1KuU";
-
+//API lequachtien123@gmail.com
 export async function translateText(text, targetLang) {
   const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
 
