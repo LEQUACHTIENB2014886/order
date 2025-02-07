@@ -109,7 +109,7 @@ const changeLang = async (lang) => {
   await updateTranslations();
   setTimeout(() => {
     loading.value = false; 
-  }, 800);
+  }, 1500);
 };
 
 const updateTranslations = async () => {

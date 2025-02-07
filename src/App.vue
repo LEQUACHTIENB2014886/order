@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <Loading ref="loadingRef" />
+    <Loading />
     <Header />
     <router-view />
     <Footer />
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from "vue";
