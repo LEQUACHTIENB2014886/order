@@ -188,7 +188,6 @@ const addToCart = (item) => {
   @media (max-width: 768px) {
     margin: 5px 0;
     width: auto;
-    
   }
 }
 
@@ -196,11 +195,9 @@ const addToCart = (item) => {
   background-color: color.mix(black, $color-1, 10%);
 }
 
-
-
 .el-alert {
   position: fixed;
-  bottom: 20px;
+  top: 80px;
   right: 20px;
   z-index: 9999;
   max-width: 600px;
