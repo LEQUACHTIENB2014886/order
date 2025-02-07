@@ -39,6 +39,7 @@
 </script>
 
 <style lang="scss" scoped>
+@use "sass:color";
 @use "@/assets/styles/variables" as *;
 
 .container {
@@ -67,6 +68,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  &:hover {
+    background: color.mix(black, $color-1, 10%);
+  }
 }
 
 .right {

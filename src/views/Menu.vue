@@ -61,6 +61,7 @@ const addToCart = (item) => {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:color";
 @use "@/assets/styles/variables" as *;
 
 .menu {
@@ -107,7 +108,6 @@ const addToCart = (item) => {
 
   &:hover {
     transform: translateY(-5px);
-    background-color: $background-color-2;
   }
 }
 
@@ -149,7 +149,7 @@ const addToCart = (item) => {
 }
 
 .item-info h3:hover {
-  color: darken($color-1, 5%);
+  color: color.mix(black, $color-1, 5%);
   transform: scale(1.1);
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -191,7 +191,7 @@ const addToCart = (item) => {
 }
 
 .btn:hover {
-  background-color: darken($color-1, 10%);
+  background-color: color.mix(black, $color-1, 10%);
 }
 
 .add-to-cart {
