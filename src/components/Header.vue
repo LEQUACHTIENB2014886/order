@@ -42,7 +42,7 @@
         <el-icon :size="28" class="orange-icon"><UserFilled /></el-icon>
       </router-link>
       <router-link to="/payments" active-class="active">
-        <el-badge :value="3" class="item">
+        <el-badge :value="`99+`" class="item">
           <el-icon :size="28" class="orange-icon"><ShoppingCart /></el-icon>
         </el-badge>
       </router-link>
