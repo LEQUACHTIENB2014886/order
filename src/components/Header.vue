@@ -137,6 +137,9 @@ onMounted(updateTranslations);
   z-index: 1000;
 }
 
+.item{
+  padding-right: 5px;
+}
 .logo-container {
   display: flex;
   align-items: center;
