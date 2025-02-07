@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watchEffect } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import Loading from "@/components/Loading.vue";
@@ -28,25 +28,23 @@ const updateTranslations = async () => {
 };
 
 onMounted(async () => {
-  let savedLocale = localStorage.getItem("locale");
-  if (!savedLocale) {
-    savedLocale = "vi"; 
-    localStorage.setItem("locale", savedLocale);
-  }
+  let savedLocale = localStorage.getItem("locale") || "vi";
+  localStorage.setItem("locale", savedLocale);
+
   await store.dispatch("language/changeLanguage", savedLocale);
   await updateTranslations();
   loading.value = false;
 });
 
-watchEffect(async () => {
-  const newLocale = store.state.language.locale;
-  if (!newLocale || newLocale === localStorage.getItem("locale")) return;
-
-  localStorage.setItem("locale", newLocale);
+router.beforeEach(async (to, from, next) => {
   loading.value = true;
-  await store.dispatch("language/changeLanguage", newLocale);
   await updateTranslations();
-  loading.value = false;
+  next();
 });
 
+router.afterEach(() => {
+  setTimeout(() => {
+    loading.value = false;
+  }, 500);
+});
 </script>
