@@ -4,8 +4,7 @@
       <div class="menu-item" v-for="item in menuItems" :key="item.id">
         <div class="image-wrapper">
   
-<img src="../assets/img-drinks/" alt="">
-
+          <img :src="`../src/assets/img-drinks/${item.Images}`" alt="${item.Images}" />
 
         </div>
         <div class="item-info">
@@ -20,7 +19,6 @@
         </div>
       </div>
     </div>
-
     <div class="alert-container">
       <transition-group name="alert-move">
         <el-alert
@@ -52,9 +50,8 @@ onMounted(() => {
       if (response.data.code === 200) {
         console.log("Dữ liệu API nhận được:", response.data.data);
 
-        // Chỉ in giá trị của cột Images
         response.data.data.forEach((item) => {
-          console.log(item.Images);  // In ra chỉ cột Images
+          // console.log(item.Images);  
         });
 
         menuItems.value = response.data.data;
@@ -68,17 +65,6 @@ onMounted(() => {
 });
 
 
-
-const getImageUrl = (imageName) => {
-  if (!imageName) {
-    return new URL("../src/assets/img-drinks/default.png", import.meta.url).href;
-  }
-  return new URL(`../src/assets/img-drinks/${imageName}`, import.meta.url).href;
-};
-
-const onImageError = (event) => {
-  console.log("Ảnh lỗi:", event.target.src);
-};
 
 
 
@@ -145,15 +131,13 @@ const removeAlert = (id) => {
 
 .image-wrapper {
   width: 100%;
-  height: 0;
-  padding-bottom: 83.33%;
+  min-height: 150px; /* Đảm bảo có chiều cao tối thiểu */
   background-color: #e0e0e0;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
   overflow: hidden;
-  transform: scale(1);
 }
 
 .image-wrapper img {
