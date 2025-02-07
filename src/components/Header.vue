@@ -70,7 +70,7 @@
       </el-dropdown>
     </el-col>
 
-    <el-col :span="3" class="icon-container">
+    <el-col :span="3" class="menu-container">
       <router-link to="/account" active-class="active">
         <el-icon :size="34" class="orange-icon"><UserFilled /></el-icon>
       </router-link>
@@ -182,45 +182,6 @@ onMounted(updateTranslations);
 
 .el-menu-item:hover {
   color: $color-1;
-}
-
-.icon-container {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  align-items: center;
-}
-
-.icon-container a {
-  color: $color-3;
-  position: relative;
-}
-
-.icon-container a.router-link-active::after {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  left: 50%;
-  width: 70%;
-  height: 2px;
-  background-color: $color-1;
-  transform: translateX(-50%);
-}
-
-/* Gạch chân icon User và Cart khi active */
-.icon-container a.router-link-active .el-icon {
-  position: relative;
-}
-
-.icon-container a.router-link-active .el-icon::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  width: 70%;
-  height: 2px;
-  background-color: $color-1;
-  transform: translateX(-50%);
 }
 
 .icon-btn {
