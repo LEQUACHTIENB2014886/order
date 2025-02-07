@@ -3,7 +3,10 @@
     <div class="menu-grid">
       <div class="menu-item" v-for="item in menuItems" :key="item.id">
         <div class="image-wrapper">
-          <img :src="item.images || defaultImage" alt="Menu Item" />
+  
+<img src="../assets/img-drinks/" alt="">
+
+
         </div>
         <div class="item-info">
           <h3>{{ $t(item.name) }}</h3>
@@ -39,24 +42,45 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 
 const menuItems = ref([]);
-const defaultImage = "/images/default-image.jpg";
+
 const alerts = ref([]);
 let alertId = 0;
-
 onMounted(() => {
   axios
     .get("http://localhost:8081/api/v1/System/Getbases")
     .then((response) => {
       if (response.data.code === 200) {
+        console.log("Dữ liệu API nhận được:", response.data.data);
+
+        // Chỉ in giá trị của cột Images
+        response.data.data.forEach((item) => {
+          console.log(item.Images);  // In ra chỉ cột Images
+        });
+
         menuItems.value = response.data.data;
       } else {
-        console.error("API Error: ", response.data.message);
+        console.error("API Error:", response.data.message);
       }
     })
     .catch((error) => {
-      console.error("API Error: ", error);
+      console.error("API Error:", error);
     });
 });
+
+
+
+const getImageUrl = (imageName) => {
+  if (!imageName) {
+    return new URL("../src/assets/img-drinks/default.png", import.meta.url).href;
+  }
+  return new URL(`../src/assets/img-drinks/${imageName}`, import.meta.url).href;
+};
+
+const onImageError = (event) => {
+  console.log("Ảnh lỗi:", event.target.src);
+};
+
+
 
 const addToCart = (item) => {
   const id = alertId++;
@@ -67,10 +91,8 @@ const addToCart = (item) => {
 };
 
 const removeAlert = (id) => {
-  alerts.value = alerts.value.filter(alert => alert.id !== id);
+  alerts.value = alerts.value.filter((alert) => alert.id !== id);
 };
-
-
 </script>
 
 
@@ -114,10 +136,10 @@ const removeAlert = (id) => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease;
-  transform: scale(1);  
+  transform: scale(1);
 
   &:hover {
-    transform: translateY(-5px) scale(1.05); 
+    transform: translateY(-5px) scale(1.05);
   }
 }
 
@@ -131,7 +153,7 @@ const removeAlert = (id) => {
   align-items: center;
   border-radius: 8px;
   overflow: hidden;
-  transform: scale(1);  
+  transform: scale(1);
 }
 
 .image-wrapper img {
@@ -199,13 +221,14 @@ const removeAlert = (id) => {
   gap: 10px;
 }
 
-.alert-move-enter-active, .alert-move-leave-active {
+.alert-move-enter-active,
+.alert-move-leave-active {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.alert-move-enter-from, .alert-move-leave-to {
+.alert-move-enter-from,
+.alert-move-leave-to {
   transform: translateY(-20px);
   opacity: 0;
 }
-
 </style>
