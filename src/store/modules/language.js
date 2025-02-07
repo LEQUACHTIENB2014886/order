@@ -1,18 +1,22 @@
+import { translateText } from "@/services/translate";
+
 const state = {
-  locale: sessionStorage.getItem("locale") || "vi",
+  locale: localStorage.getItem("locale") || "vi",
 };
 
 const mutations = {
-  setLocale(state, locale) {
-    state.locale = locale;
-    sessionStorage.setItem("locale", locale);
-    location.reload();
+  setLocale(state, lang) {
+    state.locale = lang;
+    localStorage.setItem("locale", lang);
   },
 };
 
 const actions = {
-  changeLanguage({ commit }, locale) {
-    commit("setLocale", locale);
+  async changeLanguage({ commit }, lang) {
+    commit("setLocale", lang);
+  },
+  async translate({ state }, text) {
+    return await translateText(text, state.locale);
   },
 };
 

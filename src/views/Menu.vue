@@ -1,90 +1,98 @@
 <template>
-  <div class="background">
-    <img src="../assets/Menu_background.png" alt="" />
-  </div>
+  <div class="pd"></div>
   <div class="menu">
     <div class="menu-grid">
       <div class="menu-item" v-for="item in menuItems" :key="item.id">
         <div class="image-wrapper">
           <img
             :src="`../src/assets/img-drinks/${item.Images}.png`"
-            alt="${item.Images}"
+            :alt="item.Images"
           />
         </div>
         <div class="item-info">
-          <h3>{{ $t(item.name) }}</h3>
+          <h3>{{ item.translatedName }}</h3>
           <p>{{ item.price }} ₫</p>
           <div class="item-actions">
             <button class="btn add-to-cart" @click="addToCart(item)">
-              {{ $t("add") }}
+              {{ t.add }}
             </button>
-            <button class="btn view-details">{{ $t("view") }}</button>
+            <button class="btn view-details">{{ t.view }}</button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="alert-container">
-      <transition-group name="alert-move">
-        <el-alert
-          v-for="alert in alerts"
-          :key="alert.id"
-          :title="$t('AddToCartSuccess')"
-          type="success"
-          show-icon
-          @close="removeAlert(alert.id)"
-          class="alert"
-        />
-      </transition-group>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
+import { useStore } from "vuex";
 
+const store = useStore();
 const menuItems = ref([]);
+const t = ref({ add: "Thêm vào giỏ", view: "Xem chi tiết" });
 
-const alerts = ref([]);
-let alertId = 0;
-onMounted(() => {
-  axios
-    .get("http://localhost:8081/api/v1/System/Getbases")
-    .then((response) => {
-      if (response.data.code === 200) {
-        console.log("Dữ liệu API nhận được:", response.data.data);
+const loadMenu = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:8081/api/v1/System/Getbases"
+    );
+    if (response.data.code === 200) {
+      menuItems.value = await Promise.all(
+        response.data.data.map(async (item) => {
+          const translatedName = await store.dispatch(
+            "language/translate",
+            item.name
+          );
+          return { ...item, translatedName };
+        })
+      );
+    }
+  } catch (error) {
+    console.error("API Error:", error);
+  }
+};
+const addToCart = async (item) => {
+  const translatedMessage = await store.dispatch(
+    "language/translate",
+    `Đã thêm "${item.translatedName}" vào giỏ hàng !`
+  );
 
-        response.data.data.forEach((item) => {
-          // console.log(item.Images);
-        });
+  ElMessage({
+    message: translatedMessage,
+    type: "success",
+    duration: 2000,
+    offset: 80,
+    showClose: true,
+  });
+};
 
-        menuItems.value = response.data.data;
-      } else {
-        console.error("API Error:", response.data.message);
-      }
-    })
-    .catch((error) => {
-      console.error("API Error:", error);
-    });
+const updateTranslations = async () => {
+  t.value.add = await store.dispatch("language/translate", "Add to cart");
+  t.value.view = await store.dispatch("language/translate", "View details");
+};
+
+watch(
+  () => store.state.language.locale,
+  async () => {
+    await loadMenu();
+    await updateTranslations();
+  }
+);
+
+onMounted(async () => {
+  await loadMenu();
+  await updateTranslations();
 });
-
-const addToCart = (item) => {
-  const id = alertId++;
-  alerts.value.push({ id });
-  setTimeout(() => {
-    removeAlert(id);
-  }, 2000);
-};
-
-const removeAlert = (id) => {
-  alerts.value = alerts.value.filter((alert) => alert.id !== id);
-};
 </script>
-
 
 <style lang="scss" scoped>
 @use "sass:color";
 @use "@/assets/styles/variables" as *;
+.pd {
+  padding-top: 80px;
+}
 .menu {
   margin: 20px 200px;
 

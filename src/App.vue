@@ -10,43 +10,43 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 import Loading from "@/components/Loading.vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-import { useStore } from "vuex";
-import { useI18n } from "vue-i18n";
 
 const store = useStore();
 const router = useRouter();
-const { t } = useI18n();
 const loading = ref(true);
 
-onMounted(() => {
-  setTimeout(() => {
-    loading.value = false;
-  }, 666);
+const updateTranslations = async () => {
+  const titleKey = "Title";
+  const translatedTitle = await store.dispatch("language/translate", titleKey);
+  document.title = `${translatedTitle} | ${router.currentRoute.value.name || "Trang chủ"}`;
+};
+
+onMounted(async () => {
+  let savedLocale = localStorage.getItem("locale");
+  if (!savedLocale) {
+    savedLocale = "vi"; 
+    localStorage.setItem("locale", savedLocale);
+  }
+  await store.dispatch("language/changeLanguage", savedLocale);
+  await updateTranslations();
+  loading.value = false;
 });
 
-watch(
-  () => store.state.language.locale,
-  () => {
-    loading.value = true;
-    setTimeout(() => {
-      loading.value = false;
-    }, 666);
-  }
-);
+watchEffect(async () => {
+  const newLocale = store.state.language.locale;
+  if (!newLocale || newLocale === localStorage.getItem("locale")) return;
 
-watch(
-  () => router.currentRoute.value,
-  () => {
-    loading.value = true;
-    setTimeout(() => {
-      loading.value = false;
-    }, 666);
-    document.title = `${t("title")} | ${router.currentRoute.value.name}`;
-  }
-);
+  localStorage.setItem("locale", newLocale);
+  loading.value = true;
+  await store.dispatch("language/changeLanguage", newLocale);
+  await updateTranslations();
+  loading.value = false;
+});
+
 </script>

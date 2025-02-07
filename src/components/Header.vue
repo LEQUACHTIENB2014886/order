@@ -1,45 +1,78 @@
 <template>
   <el-row class="custom-header">
-    <el-col :span="4" class="logo-container">
+    <el-col :span="2" class="logo-container">
       <a href="#"><img src="../assets/logocute.png" alt="Logo" /></a>
     </el-col>
+    <el-col :span="2"></el-col>
 
-    <el-col :span="12" class="menu-container">
-      <router-link to="/" active-class="active">{{ $t("home") }}</router-link>
-      <router-link to="/overview" active-class="active">{{ $t("about") }}</router-link>
-      <router-link to="/menu" active-class="active">{{ $t("menu") }}</router-link>
-      <router-link to="/sales" active-class="active">{{ $t("promo") }}</router-link>
-      <router-link to="/contact" active-class="active">{{ $t("contact") }}</router-link>
+    <el-col :span="16" class="menu-container">
+      <router-link to="/" active-class="active">{{
+        translations.home
+      }}</router-link>
+      <router-link to="/overview" active-class="active">{{
+        translations.about
+      }}</router-link>
+      <router-link to="/menu" active-class="active">{{
+        translations.menu
+      }}</router-link>
+      <router-link to="/sales" active-class="active">{{
+        translations.promo
+      }}</router-link>
+      <router-link to="/contact" active-class="active">{{
+        translations.contact
+      }}</router-link>
       <el-dropdown class="language" trigger="click" placement="bottom-end">
         <template #dropdown>
           <el-menu>
-            <el-menu-item index="1-1" @click="changeLang('vi')">
-              <img src="../assets/Flag/VietNam_Flag.png" alt="Vietnamese" class="icon" />
-              Tiếng Việt
-            </el-menu-item>
-            <el-menu-item index="1-2" @click="changeLang('en')">
-              <img src="../assets/Flag/United_KingDom_Flag.png" alt="English" class="icon" />
-              English
-            </el-menu-item>
-            <el-menu-item index="1-3" @click="changeLang('zh-cn')">
-              <img src="../assets/Flag/China_Flag.png" alt="Chinese Simplified" class="icon" />
-              简体中文
-            </el-menu-item>
-            <el-menu-item index="1-4" @click="changeLang('zh-tw')">
-              <img src="../assets/Flag/Taiwan_Flag.png" alt="Chinese Traditional" class="icon" />
-              繁體中文
-            </el-menu-item>
+            <el-menu-item index="1-1" @click="changeLang('vi')"
+              >Tiếng Việt</el-menu-item
+            >
+            <el-menu-item index="1-2" @click="changeLang('en')"
+              >English</el-menu-item
+            >
+            <el-menu-item index="1-3" @click="changeLang('zh-cn')"
+              >简体中文</el-menu-item
+            >
+            <el-menu-item index="1-4" @click="changeLang('zh-tw')"
+              >繁體中文</el-menu-item
+            >
           </el-menu>
         </template>
         <el-button class="icon-btn">
-          <img src="../assets/language.svg" alt="Language" class="icon" />
+          <span class="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <text
+                x="2"
+                y="11"
+                font-size="13"
+                font-weight="900"
+                font-family="Arial"
+              >
+                文
+              </text>
+              <text
+                x="11"
+                y="21"
+                font-size="15"
+                font-weight="900"
+                font-family="Arial"
+              >
+                A
+              </text>
+            </svg>
+          </span>
         </el-button>
       </el-dropdown>
     </el-col>
 
-    <el-col :span="4" class="icon-container">
+    <el-col :span="3" class="icon-container">
       <router-link to="/account" active-class="active">
-        <el-icon :size="28" class="orange-icon"><UserFilled /></el-icon>
+        <el-icon :size="34" class="orange-icon"><UserFilled /></el-icon>
       </router-link>
       <router-link to="/payments" active-class="active">
         <el-badge :value="`99+`" class="item">
@@ -47,86 +80,69 @@
         </el-badge>
       </router-link>
     </el-col>
-
-    <el-col :span="4" class="menu-toggle" @click="toggleMenu">
-      <el-icon :size="28"><Menu /></el-icon>
-    </el-col>
-
-    <transition name="slide">
-      <div v-if="mobileMenu" class="mobile-menu">
-        <router-link to="/" active-class="active" @click="toggleMenu">{{ $t("home") }}</router-link>
-        <router-link to="/overview" active-class="active" @click="toggleMenu">{{ $t("about") }}</router-link>
-        <router-link to="/menu" active-class="active" @click="toggleMenu">{{ $t("menu") }}</router-link>
-        <router-link to="/sales" active-class="active" @click="toggleMenu">{{ $t("promo") }}</router-link>
-        <el-dropdown class="language" trigger="click" placement="bottom-end">
-          <template #dropdown>
-            <el-menu>
-              <el-menu-item index="1-1" @click="changeLang('vi')">
-                <img src="../assets/Flag/VietNam_Flag.png" alt="Vietnamese" class="icon" />
-                Tiếng Việt
-              </el-menu-item>
-              <el-menu-item index="1-2" @click="changeLang('en')">
-                <img src="../assets/Flag/United_KingDom_Flag.png" alt="English" class="icon" />
-                English
-              </el-menu-item>
-              <el-menu-item index="1-3" @click="changeLang('zh-cn')">
-                <img src="../assets/Flag/China_Flag.png" alt="Chinese Simplified" class="icon" />
-                简体中文
-              </el-menu-item>
-              <el-menu-item index="1-4" @click="changeLang('zh-tw')">
-                <img src="../assets/Flag/Taiwan_Flag.png" alt="Chinese Traditional" class="icon" />
-                繁體中文
-              </el-menu-item>
-            </el-menu>
-          </template>
-          <el-button class="icon-btn">
-            <img src="../assets/language.svg" alt="Language" class="icon" />
-          </el-button>
-        </el-dropdown>
-      </div>
-    </transition>
+    <el-col :span="1"></el-col>
   </el-row>
-  <div class="padding-header"></div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-const mobileMenu = ref(false);
+const translations = ref({
+  home: "Trang chủ",
+  about: "Giới thiệu",
+  menu: "Thực đơn",
+  promo: "Khuyến mãi",
+  contact: "Liên hệ",
+});
 
-const toggleMenu = () => {
-  mobileMenu.value = !mobileMenu.value;
+const changeLang = async (lang) => {
+  localStorage.setItem("locale", lang);
+  await store.dispatch("language/changeLanguage", lang);
+  updateTranslations();
 };
 
-const changeLang = (lang) => {
-  store.dispatch("language/changeLanguage", lang);
+const updateTranslations = async () => {
+  const keys = ["Home", "Introduce", "Menu", "Promotion", "Contact"];
+  const [home, about, menu, promo, contact] = await Promise.all(
+    keys.map((key) => store.dispatch("language/translate", key))
+  );
+  translations.value = { home, about, menu, promo, contact };
 };
+onMounted(() => {
+  const savedLocale = localStorage.getItem("locale") || "vi";
+  store.dispatch("language/changeLanguage", savedLocale);
+  updateTranslations();
+});
+
+watch(() => store.state.translate?.locale, updateTranslations);
+onMounted(updateTranslations);
 </script>
 
-<style lang="scss" scoped>@use "@/assets/styles/variables" as *;
+<style lang="scss" scoped>
+@use "@/assets/styles/variables" as *;
 
 .custom-header {
   position: fixed;
-  width: 100%;
   top: 0;
   left: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 26px;
+  width: 100%;
   height: 80px;
   padding: 0 20px;
+  display: flex;
+  align-items: center;
   background-color: $background-color-1;
   border-bottom: 2px solid #ccc;
-  box-sizing: border-box;
-  
+  z-index: 1000;
 }
-.padding-header{
-  padding-top: 80px;
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
+
 .logo-container img {
   width: 58px;
   height: auto;
@@ -140,19 +156,18 @@ const changeLang = (lang) => {
 }
 
 .menu-container a {
+  position: relative;
   font-size: 16px;
   font-weight: bold;
   color: $color-3;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
-  position: relative;
 }
 
 .menu-container a:hover,
 .menu-container a.active {
   color: $color-1;
-  font-weight: bold;
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 .menu-container a.active::after {
@@ -165,48 +180,67 @@ const changeLang = (lang) => {
   background-color: $color-1;
 }
 
+.el-menu-item:hover {
+  color: $color-1;
+}
+
 .icon-container {
   display: flex;
   justify-content: flex-end;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
-  margin-right: 30px;
 }
 
 .icon-container a {
-  position: relative;
-  display: inline-block;
   color: $color-3;
+  position: relative;
 }
 
-.icon-container .active {
-  color: $color-1;
-}
-
-.icon-container .active::after {
+.icon-container a.router-link-active::after {
   content: "";
   position: absolute;
   bottom: -3px;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  width: 70%;
   height: 2px;
   background-color: $color-1;
+  transform: translateX(-50%);
 }
 
-.icon {
-  width: 26px;
-  height: 20px;
+/* Gạch chân icon User và Cart khi active */
+.icon-container a.router-link-active .el-icon {
+  position: relative;
 }
 
-.icon-btn{
-  transition: all 0.3s ease-in-out;
+.icon-container a.router-link-active .el-icon::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 70%;
+  height: 2px;
+  background-color: $color-1;
+  transform: translateX(-50%);
 }
 
-.icon-btn:hover{
-  transform: scale(1.1);
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: fill 0.3s ease-in-out;
 }
-.orange-icon {
-  color: $color-1;
+
+.icon-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: black;
+}
+
+.icon-btn:hover svg {
+  fill: $color-1;
 }
 
 .language .el-button {
@@ -216,81 +250,30 @@ const changeLang = (lang) => {
   padding: 0;
   background: none;
   border: none;
-  height: 100%;
 }
 
 .language .el-button .icon {
   width: 22px;
   height: 22px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.language .el-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.el-menu-item img.icon {
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.menu-toggle {
-  display: none;
-  cursor: pointer;
-}
-
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 80px;
-  left: 0;
-  width: 100%;
-  background: $background-color-1;
-  padding: 20px;
-}
-
-.mobile-menu a {
-  font-size: 16px;
-  font-weight: bold;
-  color: $color-3 !important;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-}
-
-.mobile-menu a:hover,
-.mobile-menu a.active {
-  color: $color-1 !important;
-  font-weight: bold;
 }
 
 @media (max-width: 768px) {
-  .menu-container,
-  .icon-container {
+  .menu-container {
     display: none;
   }
-  .menu-toggle {
-    display: block;
-  }
-  .mobile-menu {
-    display: flex;
-  }
 }
 
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.3s ease-in-out;
+.orange-icon {
+  transition: all 0.3s ease-in-out;
+  color: $color-1;
 }
 
-.slide-enter-from,
-.slide-leave-to {
-  transform: translateY(-100%);
+.orange-icon:hover {
+  transform: scale(1.2);
 }
-.item{
-  margin-right:7px;
+
+.el-menu-item.is-active {
+  color: $color-1;
+  font-weight: bold;
 }
 </style>

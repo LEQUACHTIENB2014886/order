@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="12" class="left">
         <div class="logo-container">
-          <a>{{ $t("title") }}</a>
+          <a>{{ t.title }}</a>
           <a>
             <img src="../assets/logocute.png" alt="Logo" />
           </a>
@@ -11,40 +11,58 @@
       </el-col>
       <el-col :span="12" class="right">
         <el-row class="right-first">
-          <router-link to="/" active-class="active">{{
-            $t("home")
-          }}</router-link>
-          <router-link to="/overview" active-class="active">{{
-            $t("about")
-          }}</router-link>
-          <router-link to="/menu" active-class="active">{{
-            $t("menu")
-          }}</router-link>
-          <router-link to="/sales" active-class="active">{{
-            $t("promo")
-          }}</router-link>
+          <router-link to="/" active-class="active">{{ t.home }}</router-link>
+          <router-link to="/overview" active-class="active">{{ t.introduce }}</router-link>
+          <router-link to="/menu" active-class="active">{{ t.menu }}</router-link>
+          <router-link to="/sales" active-class="active">{{ t.promo }}</router-link>
         </el-row>
         <br />
         <hr />
         <div class="contact-info">
-          <p>
-            <el-icon><PhoneFilled /></el-icon>+84 345 324 989
-          </p>
-          <p>
-            <el-icon><Message /></el-icon>haleyannemayon@email.com
-          </p>
-          <p>
-            <el-icon><Location /></el-icon> Bình Minh, Vĩnh Long
-          </p>
+          <p><el-icon><PhoneFilled /></el-icon>+84 345 324 989</p>
+          <p><el-icon><Message /></el-icon>haleyannemayon@email.com</p>
+          <p><el-icon><Location /></el-icon> Bình Minh, Vĩnh Long</p>
         </div>
       </el-col>
     </el-row>
     <el-backtop :right="50" :bottom="50" />
   </footer>
 </template>
-
 <script setup>
+import { ref, computed, watch, onMounted } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const locale = computed(() => store.state.language.locale);
+
+const t = ref({
+  title: "Trà sữa",
+  home: "Trang chủ",
+  introduce: "Giới thiệu",
+  menu: "Thực đơn",
+  promo: "Khuyến mãi",
+});
+
+const updateTranslations = async () => {
+  t.value = {
+    title: await store.dispatch("language/translate", "Trà sữa"),
+    home: await store.dispatch("language/translate", "Home"),
+    introduce: await store.dispatch("language/translate", "Introduce"),
+    menu: await store.dispatch("language/translate", "Menu"),
+    promo: await store.dispatch("language/translate", "Promotions"),
+  };
+};
+
+// Chạy dịch khi ngôn ngữ thay đổi
+watch(locale, async () => {
+  await updateTranslations();
+}, { immediate: true });
+
+onMounted(updateTranslations);
 </script>
+
+
+
 
 <style lang="scss" scoped>
 @use "sass:color";
