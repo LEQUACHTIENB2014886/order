@@ -6,82 +6,66 @@
     <el-col :span="2"></el-col>
 
     <el-col :span="16" class="menu-container">
-      <router-link to="/" active-class="active">{{
-        translations.home
-      }}</router-link>
-      <router-link to="/overview" active-class="active">{{
-        translations.about
-      }}</router-link>
-      <router-link to="/menu" active-class="active">{{
-        translations.menu
-      }}</router-link>
-      <router-link to="/sales" active-class="active">{{
-        translations.promo
-      }}</router-link>
-      <router-link to="/contact" active-class="active">{{
-        translations.contact
-      }}</router-link>
+      <div class="menu-items">
+        <router-link to="/" active-class="active">{{ translations.home }}</router-link>
+        <router-link to="/overview" active-class="active">{{ translations.about }}</router-link>
+        <router-link to="/menu" active-class="active">{{ translations.menu }}</router-link>
+        <router-link to="/sales" active-class="active">{{ translations.promo }}</router-link>
+        <router-link to="/contact" active-class="active">{{ translations.contact }}</router-link>
+      </div>
+      <el-dropdown class="mobile-menu" trigger="click" v-if="isMobile">
+        <template #dropdown>
+          <el-menu>
+            <el-menu-item index="1-1" @click="navigateTo('/')">{{ translations.home }}</el-menu-item>
+            <el-menu-item index="1-2" @click="navigateTo('/overview')">{{ translations.about }}</el-menu-item>
+            <el-menu-item index="1-3" @click="navigateTo('/menu')">{{ translations.menu }}</el-menu-item>
+            <el-menu-item index="1-4" @click="navigateTo('/sales')">{{ translations.promo }}</el-menu-item>
+            <el-menu-item index="1-5" @click="navigateTo('/contact')">{{ translations.contact }}</el-menu-item>
+          </el-menu>
+        </template>
+        <el-button class="icon-btn">
+          <el-icon :size="24"><Menu /></el-icon>
+        </el-button>
+      </el-dropdown>
       <el-dropdown class="language" trigger="click" placement="bottom-end">
-  <template #dropdown>
-    <el-menu>
-      <el-menu-item index="1-1" @click="changeLang('vi')">
-        <img src="@/assets/Flag/VietNam_Flag.png" class="flag" alt="VN" /> Tiếng Việt
-      </el-menu-item>
-      <el-menu-item index="1-2" @click="changeLang('en')">
-        <img src="@/assets/Flag/United_KingDom_Flag.png" class="flag" alt="EN" /> English
-      </el-menu-item>
-      <el-menu-item index="1-3" @click="changeLang('zh-cn')">
-        <img src="@/assets/Flag/China_Flag.png" class="flag" alt="CN" /> 简体中文
-      </el-menu-item>
-      <el-menu-item index="1-4" @click="changeLang('zh-tw')">
-        <img src="@/assets/Flag/Taiwan_Flag.png" class="flag" alt="TW" /> 繁體中文
-      </el-menu-item>
-    </el-menu>
-  </template>
-  <el-button class="icon-btn">
-    <span class="icon">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-      >
-        <text
-          x="2"
-          y="11"
-          font-size="13"
-          font-weight="900"
-          font-family="Arial"
-        >
-          文
-        </text>
-        <text
-          x="11"
-          y="21"
-          font-size="15"
-          font-weight="900"
-          font-family="Arial"
-        >
-          A
-        </text>
-      </svg>
-    </span>
-  </el-button>
-</el-dropdown>
-
+        <template #dropdown>
+          <el-menu>
+            <el-menu-item index="1-1" @click="changeLang('vi')">
+              <img src="@/assets/Flag/VietNam_Flag.png" class="flag" alt="VN" /> Tiếng Việt
+            </el-menu-item>
+            <el-menu-item index="1-2" @click="changeLang('en')">
+              <img src="@/assets/Flag/United_KingDom_Flag.png" class="flag" alt="EN" /> English
+            </el-menu-item>
+            <el-menu-item index="1-3" @click="changeLang('zh-cn')">
+              <img src="@/assets/Flag/China_Flag.png" class="flag" alt="CN" /> 简体中文
+            </el-menu-item>
+            <el-menu-item index="1-4" @click="changeLang('zh-tw')">
+              <img src="@/assets/Flag/Taiwan_Flag.png" class="flag" alt="TW" /> 繁體中文
+            </el-menu-item>
+          </el-menu>
+        </template>
+        <el-button class="icon-btn">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <text x="2" y="11" font-size="13" font-weight="900" font-family="Arial">文</text>
+              <text x="11" y="21" font-size="15" font-weight="900" font-family="Arial">A</text>
+            </svg>
+          </span>
+        </el-button>
+      </el-dropdown>
     </el-col>
+
     <el-col :span="1"></el-col>
     <el-col :span="3" class="menu-container">
       <router-link to="/account" active-class="active">
         <el-icon :size="34" class="orange-icon"><UserFilled /></el-icon>
       </router-link>
       <router-link to="/payments" active-class="active">
-        <el-badge :value="`99+`" class="item">
+        <el-badge :value="99" class="item">
           <el-icon :size="28" class="orange-icon"><ShoppingCart /></el-icon>
         </el-badge>
       </router-link>
     </el-col>
-    
   </el-row>
 
   <Loading v-show="loading" />
@@ -90,9 +74,12 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import Loading from "@/components/Loading.vue";
+import { Menu } from "@element-plus/icons-vue";
 
 const store = useStore();
+const router = useRouter();
 const translations = ref({
   home: "Trang chủ",
   about: "Giới thiệu",
@@ -101,14 +88,15 @@ const translations = ref({
   contact: "Liên hệ",
 });
 const loading = ref(false);
+const isMobile = ref(false);
 
 const changeLang = async (lang) => {
-  loading.value = true; 
+  loading.value = true;
   localStorage.setItem("locale", lang);
   await store.dispatch("language/changeLanguage", lang);
   await updateTranslations();
   setTimeout(() => {
-    loading.value = false; 
+    loading.value = false;
   }, 1500);
 };
 
@@ -120,10 +108,20 @@ const updateTranslations = async () => {
   translations.value = { home, about, menu, promo, contact };
 };
 
+const navigateTo = (path) => {
+  router.push(path);
+};
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
 onMounted(() => {
   const savedLocale = localStorage.getItem("locale") || "vi";
   store.dispatch("language/changeLanguage", savedLocale);
   updateTranslations();
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
 });
 
 watch(() => store.state.translate?.locale, updateTranslations);
@@ -146,13 +144,15 @@ watch(() => store.state.translate?.locale, updateTranslations);
   z-index: 1000;
 }
 
-.flag{
+.flag {
   width: 26px;
-  margin-right: 5px ;
+  margin-right: 5px;
 }
-.item{
+
+.item {
   padding-right: 5px;
 }
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -169,6 +169,23 @@ watch(() => store.state.translate?.locale, updateTranslations);
   justify-content: center;
   gap: 20px;
   align-items: center;
+
+  .menu-items {
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .mobile-menu {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
 }
 
 .menu-container a {
@@ -232,12 +249,6 @@ watch(() => store.state.translate?.locale, updateTranslations);
 .language .el-button .icon {
   width: 22px;
   height: 22px;
-}
-
-@media (max-width: 768px) {
-  .menu-container {
-    display: none;
-  }
 }
 
 .orange-icon {
