@@ -7,7 +7,7 @@
       <div class="menu-item" v-for="item in menuItems" :key="item.id">
         <div class="image-wrapper">
           <img
-            :src="`../src/assets/img-drinks/${item.Images}`"
+            :src="`../src/assets/img-drinks/${item.Images}.png`"
             alt="${item.Images}"
           />
         </div>
