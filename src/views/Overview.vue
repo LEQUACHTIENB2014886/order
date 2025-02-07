@@ -2,14 +2,12 @@
   <el-container>
     <el-row>
       <el-col>
-        <div>
-          <el-image src="/src/assets/img-overview/bg-overview-1.png" fit="cover" />
-        </div>
+        <el-image src="/src/assets/img-overview/bg-overview-1.png" fit="cover" />
       </el-col>
 
       <el-col class="container-content">
-        <el-row :span="16" class="content">
-          <el-col :span="8">
+        <el-row :span="15" class="content">
+          <el-col :span="7">
             <el-image src="/src/assets/img-overview/bg-overview-2.png" fit="contain" />
           </el-col>
           <el-col :span="8">
@@ -29,8 +27,8 @@
       </el-col>
 
       <el-col class="container-content2">
-        <el-row :span="16" class="content">
-          <el-col :span="8">
+        <el-row :span="15" class="content">
+          <el-col :span="7">
             <h2>
               <strong><span style="color: #ff6600;">SỨ MỆNH MÔI TRƯỜNG</span></strong>
             </h2>
@@ -55,8 +53,8 @@
       </el-col>
 
       <el-col class="container-content">
-        <el-row :span="16" class="content">
-          <el-col :span="8">
+        <el-row :span="15" class="content">
+          <el-col :span="7">
             <el-image src="/src/assets/img-overview/bg-overview-2.png" fit="contain" />
           </el-col>
 
@@ -67,7 +65,7 @@
             <p style="text-align: justify;">
               <span style="font-size: 16px;">
                 Chúng tôi tin rằng việc thực hiện kinh doanh có đạo đức và phấn đấu làm đúng việc là vấn đề sống còn cho
-                sự thành công của chúng tôi. <br/>
+                sự thành công của chúng tôi. <br />
                 Đạo đức và Tuân thủ trong Kinh doanh là chương trình hỗ trợ Sứ mệnh của chúng tôi và giúp bảo
                 vệ văn hóa cũng như danh tiếng của chúng tôi bằng cách cung cấp các tài nguyên giúp cộng sự đưa ra các
                 quyết định có đạo đức khi làm việc.
@@ -87,7 +85,7 @@
 <style scoped>
 .el-container {
   display: flex;
-  justify-content: center;
+
   align-items: center;
   flex-direction: column;
 
@@ -110,6 +108,8 @@
 .container-content2 {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin: 20px 0;
   padding: 40px;
 }
