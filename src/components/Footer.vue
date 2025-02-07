@@ -60,10 +60,6 @@ watch(locale, async () => {
 
 onMounted(updateTranslations);
 </script>
-
-
-
-
 <style lang="scss" scoped>
 @use "sass:color";
 @use "@/assets/styles/variables" as *;
@@ -92,6 +88,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  transition: all 0.5s ease-in-out;
   &:hover {
     background: color.mix(black, $color-1, 10%);
   }
