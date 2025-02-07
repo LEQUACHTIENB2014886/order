@@ -3,7 +3,7 @@
     <div class="menu-grid">
       <div class="menu-item" v-for="item in menuItems" :key="item.id">
         <div class="image-wrapper">
-          <img :src="item.url || defaultImage" alt="Menu Item" />
+          <img :src="item.images || defaultImage" alt="Menu Item" />
         </div>
         <div class="item-info">
           <h3>{{ $t(item.name) }}</h3>
@@ -18,14 +18,19 @@
       </div>
     </div>
 
-    <el-alert
-      v-if="alertVisible"
-      :title="$t('AddToCartSuccess')"
-      type="success"
-      show-icon
-      @close="alertVisible = false"
-      class="alert"
-    />
+    <div class="alert-container">
+      <transition-group name="alert-move">
+        <el-alert
+          v-for="alert in alerts"
+          :key="alert.id"
+          :title="$t('AddToCartSuccess')"
+          type="success"
+          show-icon
+          @close="removeAlert(alert.id)"
+          class="alert"
+        />
+      </transition-group>
+    </div>
   </div>
 </template>
 
@@ -35,7 +40,8 @@ import axios from "axios";
 
 const menuItems = ref([]);
 const defaultImage = "/images/default-image.jpg";
-const alertVisible = ref(false);
+const alerts = ref([]);
+let alertId = 0;
 
 onMounted(() => {
   axios
@@ -53,28 +59,33 @@ onMounted(() => {
 });
 
 const addToCart = (item) => {
-  alertVisible.value = true;
+  const id = alertId++;
+  alerts.value.push({ id });
   setTimeout(() => {
-    alertVisible.value = false;
-  }, 2222);
+    removeAlert(id);
+  }, 2000);
 };
+
+const removeAlert = (id) => {
+  alerts.value = alerts.value.filter(alert => alert.id !== id);
+};
+
+
 </script>
+
 
 <style lang="scss" scoped>
 @use "sass:color";
 @use "@/assets/styles/variables" as *;
-
 .menu {
   margin: 20px 200px;
 
   @media (max-width: 1200px) {
     margin: 20px 100px;
   }
-
   @media (max-width: 768px) {
     margin: 20px 50px;
   }
-
   @media (max-width: 480px) {
     margin: 20px 10px;
   }
@@ -88,11 +99,9 @@ const addToCart = (item) => {
   @media (max-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
   }
-
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
-
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
   }
@@ -105,9 +114,10 @@ const addToCart = (item) => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease;
+  transform: scale(1);  
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.05); 
   }
 }
 
@@ -121,6 +131,7 @@ const addToCart = (item) => {
   align-items: center;
   border-radius: 8px;
   overflow: hidden;
+  transform: scale(1);  
 }
 
 .image-wrapper img {
@@ -142,10 +153,6 @@ const addToCart = (item) => {
   margin-bottom: 10px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  }
 }
 
 .item-info h3:hover {
@@ -157,10 +164,6 @@ const addToCart = (item) => {
 .item-info p {
   font-size: 1rem;
   color: $color-3;
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-  }
 }
 
 .item-actions {
@@ -168,10 +171,6 @@ const addToCart = (item) => {
   display: flex;
   justify-content: space-between;
   width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
 }
 
 .btn {
@@ -184,41 +183,29 @@ const addToCart = (item) => {
   transition: background-color 0.3s ease;
   flex: 1;
   margin: 0 5px;
-
-  @media (max-width: 768px) {
-    margin: 5px 0;
-    width: auto;
-  }
 }
 
 .btn:hover {
   background-color: color.mix(black, $color-1, 10%);
 }
 
-.el-alert {
+.alert-container {
   position: fixed;
   top: 80px;
   right: 20px;
   z-index: 9999;
-  max-width: 600px;
-  width: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 40px;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.el-alert__content {
-  flex-grow: 1;
+.alert-move-enter-active, .alert-move-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.el-alert__close-btn {
-  font-size: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.alert-move-enter-from, .alert-move-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
 }
+
 </style>
