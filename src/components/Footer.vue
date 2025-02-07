@@ -31,10 +31,10 @@
             <el-icon><PhoneFilled /></el-icon> 0345 324 989
           </p>
           <p>
-            <el-icon><Message /></el-icon> lequachtien123@email.com
+            <el-icon><Message /></el-icon> ongnomay@email.com
           </p>
           <p>
-            <el-icon><Location /></el-icon> Bình Minh, Vĩnh Long
+            <el-icon><Location /></el-icon> Hệ mặt trời
           </p>
         </div>
       </el-col>
