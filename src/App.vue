@@ -33,6 +33,6 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   setTimeout(() => {
     loadingRef.value?.stopLoading();
-  }, 800);
+  }, 1500);
 });
 </script>

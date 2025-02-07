@@ -10,16 +10,16 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const show = ref(false);
-let isLoading = false; // Tránh restart loading nếu chưa hoàn thành
+let isLoading = false; 
 
 const startLoading = () => {
-  if (isLoading) return; // Nếu loading đang chạy, không restart
+  if (isLoading) return;
   isLoading = true;
   show.value = true;
 
   setTimeout(() => {
     stopLoading();
-  }, 1500); // Đảm bảo chạy ít nhất 1.5s để không quá nhanh
+  }, 1500); 
 };
 
 const stopLoading = () => {
