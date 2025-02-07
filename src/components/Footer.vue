@@ -34,7 +34,7 @@
             <el-icon><Message /></el-icon>haleyannemayon@email.com
           </p>
           <p>
-            <el-icon><Location /></el-icon> Bình Minh, Vĩnh Long, 
+            <el-icon><Location /></el-icon> Bình Minh, Vĩnh Long
           </p>
         </div>
       </el-col>
@@ -66,7 +66,7 @@ footer {
 
 .left,
 .right {
-  padding: 30px;
+  padding: 15px 30px;
 }
 
 .left {
