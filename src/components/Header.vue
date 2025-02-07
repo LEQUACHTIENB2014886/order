@@ -22,54 +22,55 @@
         translations.contact
       }}</router-link>
       <el-dropdown class="language" trigger="click" placement="bottom-end">
-        <template #dropdown>
-          <el-menu>
-            <el-menu-item index="1-1" @click="changeLang('vi')"
-              >Tiếng Việt</el-menu-item
-            >
-            <el-menu-item index="1-2" @click="changeLang('en')"
-              >English</el-menu-item
-            >
-            <el-menu-item index="1-3" @click="changeLang('zh-cn')"
-              >简体中文</el-menu-item
-            >
-            <el-menu-item index="1-4" @click="changeLang('zh-tw')"
-              >繁體中文</el-menu-item
-            >
-          </el-menu>
-        </template>
-        <el-button class="icon-btn">
-          <span class="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-            >
-              <text
-                x="2"
-                y="11"
-                font-size="13"
-                font-weight="900"
-                font-family="Arial"
-              >
-                文
-              </text>
-              <text
-                x="11"
-                y="21"
-                font-size="15"
-                font-weight="900"
-                font-family="Arial"
-              >
-                A
-              </text>
-            </svg>
-          </span>
-        </el-button>
-      </el-dropdown>
-    </el-col>
+  <template #dropdown>
+    <el-menu>
+      <el-menu-item index="1-1" @click="changeLang('vi')">
+        <img src="@/assets/Flag/VietNam_Flag.png" class="flag" alt="VN" /> Tiếng Việt
+      </el-menu-item>
+      <el-menu-item index="1-2" @click="changeLang('en')">
+        <img src="@/assets/Flag/United_KingDom_Flag.png" class="flag" alt="EN" /> English
+      </el-menu-item>
+      <el-menu-item index="1-3" @click="changeLang('zh-cn')">
+        <img src="@/assets/Flag/China_Flag.png" class="flag" alt="CN" /> 简体中文
+      </el-menu-item>
+      <el-menu-item index="1-4" @click="changeLang('zh-tw')">
+        <img src="@/assets/Flag/Taiwan_Flag.png" class="flag" alt="TW" /> 繁體中文
+      </el-menu-item>
+    </el-menu>
+  </template>
+  <el-button class="icon-btn">
+    <span class="icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <text
+          x="2"
+          y="11"
+          font-size="13"
+          font-weight="900"
+          font-family="Arial"
+        >
+          文
+        </text>
+        <text
+          x="11"
+          y="21"
+          font-size="15"
+          font-weight="900"
+          font-family="Arial"
+        >
+          A
+        </text>
+      </svg>
+    </span>
+  </el-button>
+</el-dropdown>
 
+    </el-col>
+    <el-col :span="1"></el-col>
     <el-col :span="3" class="menu-container">
       <router-link to="/account" active-class="active">
         <el-icon :size="34" class="orange-icon"><UserFilled /></el-icon>
@@ -80,13 +81,16 @@
         </el-badge>
       </router-link>
     </el-col>
-    <el-col :span="1"></el-col>
+    
   </el-row>
+
+  <Loading v-show="loading" />
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import { useStore } from "vuex";
+import Loading from "@/components/Loading.vue";
 
 const store = useStore();
 const translations = ref({
@@ -96,11 +100,16 @@ const translations = ref({
   promo: "Khuyến mãi",
   contact: "Liên hệ",
 });
+const loading = ref(false);
 
 const changeLang = async (lang) => {
+  loading.value = true; 
   localStorage.setItem("locale", lang);
   await store.dispatch("language/changeLanguage", lang);
-  updateTranslations();
+  await updateTranslations();
+  setTimeout(() => {
+    loading.value = false; 
+  }, 800);
 };
 
 const updateTranslations = async () => {
@@ -110,6 +119,7 @@ const updateTranslations = async () => {
   );
   translations.value = { home, about, menu, promo, contact };
 };
+
 onMounted(() => {
   const savedLocale = localStorage.getItem("locale") || "vi";
   store.dispatch("language/changeLanguage", savedLocale);
@@ -117,7 +127,6 @@ onMounted(() => {
 });
 
 watch(() => store.state.translate?.locale, updateTranslations);
-onMounted(updateTranslations);
 </script>
 
 <style lang="scss" scoped>
@@ -137,6 +146,10 @@ onMounted(updateTranslations);
   z-index: 1000;
 }
 
+.flag{
+  width: 26px;
+  margin-right: 5px ;
+}
 .item{
   padding-right: 5px;
 }

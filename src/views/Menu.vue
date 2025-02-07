@@ -97,7 +97,7 @@ onMounted(async () => {
   margin: 20px 200px;
 
   @media (max-width: 1200px) {
-    margin: 20px 100px;
+    margin: 20px 100px; 
   }
   @media (max-width: 768px) {
     margin: 20px 50px;
