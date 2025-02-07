@@ -65,16 +65,40 @@ const addToCart = (item) => {
 
 .menu {
   margin: 20px 200px;
+
+  @media (max-width: 1200px) {
+    margin: 20px 100px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 20px 50px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 20px 10px;
+  }
 }
 
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .menu-item {
-  background-color: #f9f9f9;
+  background-color: $background-color-1;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -83,6 +107,7 @@ const addToCart = (item) => {
 
   &:hover {
     transform: translateY(-5px);
+    background-color: $background-color-2;
   }
 }
 
@@ -116,25 +141,37 @@ const addToCart = (item) => {
   text-transform: capitalize;
   margin-bottom: 10px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 }
 
 .item-info h3:hover {
   color: darken($color-1, 5%);
-  transform: scale(1.1); 
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.1);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-
 
 .item-info p {
   font-size: 1rem;
   color: $color-3;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 }
+
 .item-actions {
   margin-top: 10px;
-  display: flex; 
+  display: flex;
   justify-content: space-between;
   width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .btn {
@@ -145,8 +182,12 @@ const addToCart = (item) => {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  flex: 1; 
+  flex: 1;
   margin: 0 5px;
+
+  @media (max-width: 768px) {
+    margin: 5px 0;
+  }
 }
 
 .btn:hover {
@@ -187,5 +228,4 @@ const addToCart = (item) => {
   top: 10px;
   right: 10px;
 }
-
 </style>

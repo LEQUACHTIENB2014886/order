@@ -42,22 +42,19 @@
 @use "@/assets/styles/variables" as *;
 
 .container {
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 120px;
-  z-index: 10;
   background-color: #fff;
-  margin-bottom: 100px; 
+  margin-top: auto;
 }
+
 
 
 .left,
