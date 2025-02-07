@@ -86,6 +86,7 @@
       </div>
     </transition>
   </el-row>
+  <div class="padding-header"></div>
 </template>
 
 <script setup>
@@ -107,6 +108,11 @@ const changeLang = (lang) => {
 <style lang="scss" scoped>@use "@/assets/styles/variables" as *;
 
 .custom-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -118,7 +124,9 @@ const changeLang = (lang) => {
   box-sizing: border-box;
   
 }
-
+.padding-header{
+  padding-top: 80px;
+}
 .logo-container img {
   width: 58px;
   height: auto;

@@ -1,11 +1,15 @@
 <template>
+  <div class="background">
+    <img src="../assets/Menu_background.png" alt="" />
+  </div>
   <div class="menu">
     <div class="menu-grid">
       <div class="menu-item" v-for="item in menuItems" :key="item.id">
         <div class="image-wrapper">
-  
-          <img :src="`../src/assets/img-drinks/${item.Images}`" alt="${item.Images}" />
-
+          <img
+            :src="`../src/assets/img-drinks/${item.Images}`"
+            alt="${item.Images}"
+          />
         </div>
         <div class="item-info">
           <h3>{{ $t(item.name) }}</h3>
@@ -51,7 +55,7 @@ onMounted(() => {
         console.log("Dữ liệu API nhận được:", response.data.data);
 
         response.data.data.forEach((item) => {
-          // console.log(item.Images);  
+          // console.log(item.Images);
         });
 
         menuItems.value = response.data.data;
@@ -63,10 +67,6 @@ onMounted(() => {
       console.error("API Error:", error);
     });
 });
-
-
-
-
 
 const addToCart = (item) => {
   const id = alertId++;
@@ -128,10 +128,9 @@ const removeAlert = (id) => {
     transform: translateY(-5px) scale(1.05);
   }
 }
-
 .image-wrapper {
   width: 100%;
-  min-height: 150px; /* Đảm bảo có chiều cao tối thiểu */
+  aspect-ratio: 1 / 1;
   background-color: #e0e0e0;
   display: flex;
   justify-content: center;
@@ -144,6 +143,7 @@ const removeAlert = (id) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .item-info {
@@ -193,6 +193,21 @@ const removeAlert = (id) => {
 
 .btn:hover {
   background-color: color.mix(black, $color-1, 10%);
+}
+.background {
+  position: relative;
+  width: 100%;
+  // height: 700px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .alert-container {
