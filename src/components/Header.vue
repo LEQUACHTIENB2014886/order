@@ -11,7 +11,7 @@
         <router-link to="/" active-class="active">{{
           translations.home
         }}</router-link>
-        <router-link to="/overview" active-class="active">{{
+        <router-link to="/introduce" active-class="active">{{
           translations.about
         }}</router-link>
         <router-link to="/menu" active-class="active">{{

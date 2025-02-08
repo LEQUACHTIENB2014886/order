@@ -12,7 +12,7 @@
       <el-col :span="12" class="right">
         <el-row class="right-first">
           <router-link to="/" active-class="active">{{ t.home }}</router-link>
-          <router-link to="/overview" active-class="active">{{ t.introduce }}</router-link>
+          <router-link to="/introduce" active-class="active">{{ t.introduce }}</router-link>
           <router-link to="/menu" active-class="active">{{ t.menu }}</router-link>
           <router-link to="/sales" active-class="active">{{ t.promo }}</router-link>
         </el-row>
