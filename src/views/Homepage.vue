@@ -25,8 +25,8 @@
         <h1 class="title">Sản phẩm nổi bật</h1>
 
         <!-- Danh sách sản phẩm -->
-        <el-row class="content2" :gutter="40" justify="center">
-          <el-col v-for="(img2, index) in imgs2" :key="index" :xs="24" :sm="12" :md="8" :lg="6">
+        <el-row class="content2" :gutter="10">
+          <el-col v-for="(img2, index) in imgs2" :key="index" :xs="11" :sm="7" :md="5" :lg="5">
             <el-image :src="img2" fit="cover" class="content-image2" />
           </el-col>
         </el-row>
@@ -34,7 +34,7 @@
     </el-row>
 
     <!-- Footer -->
-    
+
   </div>
 </template>
 
@@ -48,6 +48,8 @@ const imgs2 = [
   "/images/img5.png",
   "/images/img6.png",
   "/images/img7.png",
+  "/images/img4.png",
+  "/images/img3.png",
 ];
 </script>
 
@@ -71,6 +73,7 @@ const imgs2 = [
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   color: #ff6600;
   text-align: center;
 }
@@ -89,16 +92,20 @@ const imgs2 = [
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1500px;
-  gap: 40px;
+  align-items: center;
+  max-width: 1600px;
+  padding: 20px 0;
+  gap: 20px;
 }
 
 .content-image2 {
   width: 100%;
-  padding: 20px 0;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-/* Tiêu đề */
+/* Tiêu đề sản phẩm nổi bật */
 .title {
   margin-top: 20px;
   font-size: 24px;
