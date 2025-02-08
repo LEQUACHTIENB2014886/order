@@ -10,7 +10,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const show = ref(false);
-let isLoading = false; 
+let isLoading = false;
 
 const startLoading = () => {
   if (isLoading) return;
@@ -19,7 +19,7 @@ const startLoading = () => {
 
   setTimeout(() => {
     stopLoading();
-  }, 1500); 
+  }, 1500);
 };
 
 const stopLoading = () => {

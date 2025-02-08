@@ -7,20 +7,40 @@
 
     <el-col :span="16" class="menu-container">
       <div class="menu-items">
-        <router-link to="/" active-class="active">{{ translations.home }}</router-link>
-        <router-link to="/overview" active-class="active">{{ translations.about }}</router-link>
-        <router-link to="/menu" active-class="active">{{ translations.menu }}</router-link>
-        <router-link to="/sales" active-class="active">{{ translations.promo }}</router-link>
-        <router-link to="/contact" active-class="active">{{ translations.contact }}</router-link>
+        <router-link to="/" active-class="active">{{
+          translations.home
+        }}</router-link>
+        <router-link to="/overview" active-class="active">{{
+          translations.about
+        }}</router-link>
+        <router-link to="/menu" active-class="active">{{
+          translations.menu
+        }}</router-link>
+        <router-link to="/sales" active-class="active">{{
+          translations.promo
+        }}</router-link>
+        <router-link to="/contact" active-class="active">{{
+          translations.contact
+        }}</router-link>
       </div>
       <el-dropdown class="mobile-menu" trigger="click" v-if="isMobile">
         <template #dropdown>
           <el-menu>
-            <el-menu-item index="1-1" @click="navigateTo('/')">{{ translations.home }}</el-menu-item>
-            <el-menu-item index="1-2" @click="navigateTo('/overview')">{{ translations.about }}</el-menu-item>
-            <el-menu-item index="1-3" @click="navigateTo('/menu')">{{ translations.menu }}</el-menu-item>
-            <el-menu-item index="1-4" @click="navigateTo('/sales')">{{ translations.promo }}</el-menu-item>
-            <el-menu-item index="1-5" @click="navigateTo('/contact')">{{ translations.contact }}</el-menu-item>
+            <el-menu-item index="1-1" @click="navigateTo('/')">{{
+              translations.home
+            }}</el-menu-item>
+            <el-menu-item index="1-2" @click="navigateTo('/overview')">{{
+              translations.about
+            }}</el-menu-item>
+            <el-menu-item index="1-3" @click="navigateTo('/menu')">{{
+              translations.menu
+            }}</el-menu-item>
+            <el-menu-item index="1-4" @click="navigateTo('/sales')">{{
+              translations.promo
+            }}</el-menu-item>
+            <el-menu-item index="1-5" @click="navigateTo('/contact')">{{
+              translations.contact
+            }}</el-menu-item>
           </el-menu>
         </template>
         <el-button class="icon-btn">
@@ -31,24 +51,53 @@
         <template #dropdown>
           <el-menu>
             <el-menu-item index="1-1" @click="changeLang('vi')">
-              <img src="@/assets/Flag/VietNam_Flag.png" class="flag" alt="VN" /> Tiếng Việt
+              <img src="@/assets/Flag/VietNam_Flag.png" class="flag" alt="VN" />
+              Tiếng Việt
             </el-menu-item>
             <el-menu-item index="1-2" @click="changeLang('en')">
-              <img src="@/assets/Flag/United_KingDom_Flag.png" class="flag" alt="EN" /> English
+              <img
+                src="@/assets/Flag/United_KingDom_Flag.png"
+                class="flag"
+                alt="EN"
+              />
+              English
             </el-menu-item>
             <el-menu-item index="1-3" @click="changeLang('zh-cn')">
-              <img src="@/assets/Flag/China_Flag.png" class="flag" alt="CN" /> 简体中文
+              <img src="@/assets/Flag/China_Flag.png" class="flag" alt="CN" />
+              简体中文
             </el-menu-item>
             <el-menu-item index="1-4" @click="changeLang('zh-tw')">
-              <img src="@/assets/Flag/Taiwan_Flag.png" class="flag" alt="TW" /> 繁體中文
+              <img src="@/assets/Flag/Taiwan_Flag.png" class="flag" alt="TW" />
+              繁體中文
             </el-menu-item>
           </el-menu>
         </template>
         <el-button class="icon-btn">
           <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-              <text x="2" y="11" font-size="13" font-weight="900" font-family="Arial">文</text>
-              <text x="11" y="21" font-size="15" font-weight="900" font-family="Arial">A</text>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <text
+                x="2"
+                y="11"
+                font-size="13"
+                font-weight="900"
+                font-family="Arial"
+              >
+                文
+              </text>
+              <text
+                x="11"
+                y="21"
+                font-size="15"
+                font-weight="900"
+                font-family="Arial"
+              >
+                A
+              </text>
             </svg>
           </span>
         </el-button>
@@ -184,6 +233,7 @@ watch(() => store.state.translate?.locale, updateTranslations);
 
     @media (max-width: 768px) {
       display: block;
+  
     }
   }
 }
