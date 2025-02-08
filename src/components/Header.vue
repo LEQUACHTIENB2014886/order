@@ -1,10 +1,11 @@
 <template>
   <el-row class="custom-header">
+    
+    <el-col :span="1"></el-col>
     <el-col :span="2" class="logo-container">
       <a href="#"><img src="../assets/logocute.png" alt="Logo" /></a>
     </el-col>
-    <el-col :span="2"></el-col>
-
+    <el-col :span="1"></el-col>
     <el-col :span="16" class="menu-container">
       <div class="menu-items">
         <router-link to="/" active-class="active">{{
@@ -103,9 +104,7 @@
         </el-button>
       </el-dropdown>
     </el-col>
-
-    <el-col :span="1"></el-col>
-    <el-col :span="3" class="menu-container">
+    <el-col :span="2" class="menu-container">
       <router-link to="/account" active-class="active">
         <el-icon :size="34" class="orange-icon"><UserFilled /></el-icon>
       </router-link>
@@ -115,6 +114,7 @@
         </el-badge>
       </router-link>
     </el-col>
+    <el-col :span="2"></el-col>
   </el-row>
 
   <Loading v-show="loading" />
