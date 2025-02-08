@@ -14,6 +14,7 @@ import Loading from "@/components/Loading.vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 
+
 const router = useRouter();
 const loadingRef = ref(null);
 

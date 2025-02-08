@@ -20,7 +20,7 @@
         <hr />
         <div class="contact-info">
           <p><el-icon><PhoneFilled /></el-icon>+84 345 324 989</p>
-          <p><el-icon><Message /></el-icon>haleyannemayon@email.com</p>
+          <p><el-icon><Message /></el-icon>lequachtien123</p>
           <p><el-icon><Location /></el-icon> Bình Minh, Vĩnh Long</p>
         </div>
       </el-col>

@@ -303,7 +303,6 @@ watch(() => store.state.translate?.locale, updateTranslations);
 
 .orange-icon {
   transition: all 0.3s ease-in-out;
-  color: $color-1;
 }
 
 .orange-icon:hover {
